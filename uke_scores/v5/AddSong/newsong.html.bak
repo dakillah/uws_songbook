@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Song</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Enter the Title:</h2>
+    <input type="text" id="title" class="input-box" placeholder="Type your title here">
+    <h2>Enter the Artist Name:</h2>
+    <input type="text" id="artist" class="input-box" placeholder="Type the artist's name here">
+    <h2>Enter the Song Lyrics:</h2>
+    <textarea id="lyrics" class="textarea-box" placeholder="Type the song lyrics here"></textarea>
+ <h2>Select Chords:</h2>
+    <div class="checkboxes">
+        <div class="column" id="column-a">
+
+            <label><input type="checkbox" value="A#"> A#</label>
+            <label><input type="checkbox" value="A"> A</label>
+            <label><input type="checkbox" value="A7"> A7</label>
+            <label><input type="checkbox" value="Ab"> Ab</label>
+            <label><input type="checkbox" value="Am"> Am</label>
+			<label><input type="checkbox" value="Am"> Am7</label>
+        </div>
+        <div class="column" id="column-b">
+            
+            <label><input type="checkbox" value="B"> B</label>
+			<label><input type="checkbox" value="B"> B7</label>
+            <label><input type="checkbox" value="Bb"> Bb</label>
+            <label><input type="checkbox" value="Bbm"> Bbm</label>
+            <label><input type="checkbox" value="Bm"> Bm</label>
+			<label><input type="checkbox" value="Bm"> Bm7</label>
+        </div>
+        <div class="column" id="column-c">
+            
+            <label><input type="checkbox" value="C"> C</label>
+            <label><input type="checkbox" value="C+"> C+</label>
+            <label><input type="checkbox" value="C5"> C5</label>
+			<label><input type="checkbox" value="C"> C7</label>
+            <label><input type="checkbox" value="Cm"> Cm</label>
+            <label><input type="checkbox" value="Csus4"> Csus4</label>
+			<label><input type="checkbox" value="C"> Cmaj7</label>
+        </div>
+        <div class="column" id="column-d">
+            
+            <label><input type="checkbox" value="D"> D</label>
+			<label><input type="checkbox" value="D"> D7</label>
+            <label><input type="checkbox" value="Db"> Db</label>
+            <label><input type="checkbox" value="Dm"> Dm</label>
+        </div>
+        <div class="column" id="column-e">
+            
+            <label><input type="checkbox" value="E"> E</label>
+			<label><input type="checkbox" value="E"> E7</label>
+            <label><input type="checkbox" value="Eb"> Eb</label>
+            <label><input type="checkbox" value="Em"> Em</label>
+			<label><input type="checkbox" value="Em"> Em7</label>
+			<label><input type="checkbox" value="Em"> Esus4</label>
+			
+        </div>
+        <div class="column" id="column-f">
+           
+            <label><input type="checkbox" value="F"> F</label>
+			<label><input type="checkbox" value="F"> F7</label>
+            <label><input type="checkbox" value="Fm"> F#m</label>
+			<label><input type="checkbox" value="Fm"> Fm</label>
+            <label><input type="checkbox" value="Fmaj7"> Fmaj7</label>
+            <label><input type="checkbox" value="Fsus4"> Fsus4</label>
+        </div>
+        <div class="column" id="column-g">
+            
+			<label><input type="checkbox" value="G"> G</label>
+			<label><input type="checkbox" value="G"> G7</label>
+            <label><input type="checkbox" value="Gm7"> Gm7</label>
+            <label><input type="checkbox" value="Gm"> Gm</label>
+            <label><input type="checkbox" value="Gmaj7"> Gmaj7</label>
+        </div>
+    </div>
+    <button onclick="saveData()">Save Data</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
