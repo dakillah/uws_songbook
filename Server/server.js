@@ -1,11 +1,9 @@
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 3001;
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const uri = "mongodb+srv://UwsUser:UWSS0ngB00k!@uwssongbookcluster.mlrxi58.mongodb.net/?retryWrites=true&w=majority&appName=uwssongbookcluster";
-
-const host = "0.0.0.0";
-const port = 8001;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -34,14 +32,14 @@ app.get('/listSongs', async function (req, res)
 
 
 
-var server = app.listen(port, host, function () 
+var server = app.listen(port, function () 
 {
     const client = new MongoClient(uri);
 
 
-    console.log("Host: ", host);
-    console.log("Port: ", port);
+    //console.log("Host: ", host);
+    //console.log("Port: ", port);
 
-    console.log("Example app listening at http://%s:%s", host, port)
+    console.log("Listening...")
 })
 
