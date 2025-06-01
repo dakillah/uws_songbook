@@ -23,8 +23,9 @@ async function run() {
     const collection = db.collection("scores");
 
     //Query Artist
-    const query = {title: "Angel"};
-    const queryResult = await collection.findOne(query);
+    //const query = {title: "2002"};
+    //const queryResult = await collection.findOne(query);
+    const queryResult = await collection.find().toArray();
     console.log("Results: ", queryResult);
 
   } finally {
