@@ -235,10 +235,12 @@ function initSongSelection(){
 
             data.forEach((song, index) => {
 
-                    const option = document.createElement('option');
-                    option.textContent = song.title;
-                    option.value = song.title;
-                    songDropdown.appendChild(option);
+                console.log("Adding: <" + song.title + "> to Title Dropdown Box");
+
+                const option = document.createElement('option');
+                option.textContent = song.title;
+                option.value = song.title;
+                songDropdown.appendChild(option);
             });
 
         } else {
