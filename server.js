@@ -37,7 +37,9 @@ app.get('/listArtists', async function (req, res)
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
-    const queryRes = await collection.find({ }, { _id : 0, title : 0, lyrics : 0, chords : 0 }).sort({ artist : 1 }).toArray();
+    const queryTitle = req.query.title;
+
+    const queryRes = await collection.find({ title : queryTitle }, { _id : 0, title : 0, lyrics : 0, chords : 0 }).sort({ artist : 1 }).toArray();
 
     res.json(queryRes);
 })
