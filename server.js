@@ -37,7 +37,7 @@ app.get('/listArtists', async function (req, res)
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
-    const queryRes = await collection.find({}, { "_id" : 0, "title" : 0, "lyrics" : 0, "chords" : 0 }).sort({ "artist" : 1 }).toArray();
+    const queryRes = await collection.find({ }, { "_id" : 0, "title" : 0, "lyrics" : 0, "chords" : 0 }).sort({ "artist" : 1 }).toArray();
 
     res.json(queryRes);
 })
@@ -50,7 +50,7 @@ app.get('/listTitles', async function (req, res)
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
-    const queryRes = await collection.find({}, { "_id" : 0, "artist" : 0, "lyrics" : 0, "chords" : 0  }).sort({ "title" : 1 }).toArray();
+    const queryRes = await collection.find({ }, { "_id" : 0, "artist" : 0, "lyrics" : 0, "chords" : 0  }).sort({ "title" : 1 }).toArray();
 
     res.json(queryRes);
 })
@@ -69,7 +69,7 @@ app.get('/getLyrics', async function (req, res)
 
     console.log("getLyrics?artist=" + queryArtist + "&title=" + queryTitle);
 
-    const queryRes = await collection.find({ artist : queryArtist, title : queryTitle }).toArray();
+    const queryRes = await collection.findOne({ "artist" : queryArtist, "title" : queryTitle });
 
     console.log("queryRes=", queryRes);
 
