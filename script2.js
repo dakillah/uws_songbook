@@ -1,5 +1,6 @@
 const artistDropdown = document.getElementById('artistDropdown');
 const songDropdown = document.getElementById('songDropdown');
+const pageBody = document.getElementById('pageBody');
 const noSongsMessageP = document.getElementById('noSongsMessage');
 
 // Song details elements
@@ -223,24 +224,22 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 // --- END: Event Listeners for Scroll Controls ---
 
 // --- START: Retrieve Artist and Songs List via REST API ---
-async function fetchData() {
-  try {
-    const response = await fetch('https://uws-songbook-svr.onrender.com/listSongs');
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const songListJSON = await response.json(); // Or response.text() for non-JSON data
-    //console.log(data); // Process the received data
+function initSongSelection{
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://uws-songbook-svr.onrender.com/listArtists'); // Replace with your API endpoint
 
-    for(var song in songListJSON) {
-        artistDropdown.appendChild(document.createElement('artist').textContent(song.artist));
-    }
- 
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const data = JSON.parse(xhr.responseText);
+            console.log(data);
+        } else {
+            console.error("Request failed. Status:", xhr.status);
+        }
+    };
+    xhr.onerror = function() {
+        console.error("Request failed");
+    };
+
+    xhr.send();
 }
-
-fetchData();
-
 // --- END: Retrieve Artist and Songs List via REST API ---
