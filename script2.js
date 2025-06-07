@@ -232,6 +232,17 @@ function initSongSelection(){
         if (xhr.status >= 200 && xhr.status < 300) {
             const data = JSON.parse(xhr.responseText);
             console.log(data);
+
+            data.forEach((song, index) => {
+
+                console.log("Adding: <" + song.title + "> to Title Dropdown Box");
+
+                const option = document.createElement('option');
+                option.textContent = song.title;
+                option.value = song.title;
+                songDropdown.appendChild(option);
+            });
+
         } else {
             console.error("Request failed. Status:", xhr.status);
         }
