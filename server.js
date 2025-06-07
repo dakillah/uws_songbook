@@ -1,7 +1,18 @@
-const path = require('path')
-
 const express = require('express');
 const app = express();
+
+const cors = require('cors');
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'https://uws-songbook.onrender.com');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+
+    // Pass to next layer of middleware
+    next();
+});
 
 const port = process.env.PORT || 3001;
 
@@ -29,14 +40,6 @@ app.get('/listSongs', async function (req, res)
 
     res.json(songsList);
 })
-
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "./index.html"));
-});
-
-app.get("/index2", function (req, res) {
-    res.sendFile(path.join(__dirname, "./index2.html"));
-});
 
 app.get('/listArtists', async function (req, res)
 {
