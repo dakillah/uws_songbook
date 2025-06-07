@@ -36,7 +36,7 @@ app.get('/listSongs', async function (req, res)
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
-    songsList = await collection.find().sort({artist : 1, title : 1}).toArray();
+    const songsList = await collection.find().sort({artist : 1, title : 1}).toArray();
 
     res.json(songsList);
 })
@@ -49,15 +49,15 @@ app.get('/listArtists', async function (req, res)
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
-    songsList = await collection.find(
-        {},
-        { _id : 1, 
-          artist : 1, 
-          title : 1, 
-          lyrics : 0, 
-          chords : 0 
-        }
-    ).sort({artist : 1, title : 1}).toArray();
+    const songsList = await collection.find()
+                      .projec(
+                      { _id : 1, 
+                        artist : 1, 
+                        title : 1, 
+                        lyrics : 0, 
+                        chords : 0 
+                       })
+                      .sort({artist : 1, title : 1}).toArray();
 
     res.json(songsList);
 })
