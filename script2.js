@@ -1,6 +1,6 @@
 const artistDropdown = document.getElementById('artistDropdown');
 const songDropdown = document.getElementById('songDropdown');
-const pageBody = document.getElementById('pageBody');
+const goButton = document.getElementById('goButton');
 const noSongsMessageP = document.getElementById('noSongsMessage');
 
 // Song details elements
@@ -93,7 +93,7 @@ function resetLyricsScroll() {
 }
 
 // Display Song Data
-function displaySongData(songData, songFileName) {
+function displaySongData(songData) {
     resetLyricsScroll(); // Stop/reset scroll when a new song is displayed
     errorMessageDiv.textContent = '';
     songChordsUl.innerHTML = '';
@@ -153,45 +153,6 @@ function displaySongData(songData, songFileName) {
         songLyricsPre.textContent = lyricsText;
     }
     songDetailsContainer.style.display = 'block';
-}
-
-// Load and Display Song
-function loadAndDisplaySong(fileIndex) {
-    if (fileIndex === "" || fileIndex === undefined || fileIndex < 0) {
-        songDetailsContainer.style.display = 'none';
-        errorMessageDiv.textContent = '';
-        resetLyricsScroll();
-        return;
-    }
-
-    const fileToLoad = selectedFiles[parseInt(fileIndex)];
-    if (fileToLoad) {
-        const reader = new FileReader();
-        reader.onload = function(e_reader) {
-            try {
-                const songData = JSON.parse(e_reader.target.result);
-                displaySongData(songData, fileToLoad.name);
-            } catch (err) {
-                errorMessageDiv.textContent = `Error parsing ${fileToLoad.name}: ${err.message}.`;
-                songDetailsContainer.style.display = 'block';
-                songTitleEl.textContent = '';
-                songArtistEl.textContent = '';
-                songChordsUl.innerHTML = '';
-                songLyricsPre.textContent = '';
-                resetLyricsScroll();
-            }
-        };
-        reader.onerror = function() {
-            errorMessageDiv.textContent = `Error reading ${fileToLoad.name}.`;
-            songDetailsContainer.style.display = 'block';
-            songTitleEl.textContent = '';
-            songArtistEl.textContent = '';
-            songChordsUl.innerHTML = '';
-            songLyricsPre.textContent = '';
-            resetLyricsScroll();
-        };
-        reader.readAsText(fileToLoad);
-    }
 }
 
 // Song Dropdown Change Listener
@@ -257,6 +218,34 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
     console.error("Scroll speed input or value span not found.");
 }
 // --- END: Event Listeners for Scroll Controls ---
+
+// --- START: Event Listener for Go Button ---
+goButton.addEventListener("click", function(event){
+    const songTitle = songDropdown.value;
+    const songArtist = artistDropdown.value;
+
+    const xhr = new XMLHttpRequest();
+    const httpQuery = "https://uws-songbook-svr.onrender.com/getLyrics?artist=" + songArtist + "&title=" + songTitle;
+    xhr.open('GET', httpQuery); // Replace with your API endpoint
+
+
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const data = JSON.parse(xhr.responseText);
+            console.log(data);
+
+            displaySongData(data);
+
+        } else {
+            console.error("Request failed. Status:", xhr.status);
+        }
+    };
+    xhr.onerror = function() {
+        console.error("Request failed");
+    };
+
+});
+// --- END: Event Listener for Go Button ---
 
 // --- START: Retrieve Artist and Songs List via REST API ---
 function initSongSelection(){
