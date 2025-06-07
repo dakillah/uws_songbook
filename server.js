@@ -71,6 +71,8 @@ app.get('/getLyrics', async function (req, res)
 
     const queryRes = await collection.find({ artist : queryArtist, title : queryTitle });
 
+    console.log("queryRes=", queryRes);
+
     res.json(queryRes);
 })
 
