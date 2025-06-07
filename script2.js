@@ -220,7 +220,7 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 // --- END: Event Listeners for Scroll Controls ---
 
 // --- START: Go Button event handler ---
-function retrieveAndDisplaySong() {
+function retrieveAndDisplaySong(){
     const songTitle = songDropdown.value;
     const songArtist = artistDropdown.value;
 
