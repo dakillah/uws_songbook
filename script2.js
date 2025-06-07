@@ -224,7 +224,7 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 // --- END: Event Listeners for Scroll Controls ---
 
 // --- START: Retrieve Artist and Songs List via REST API ---
-function initSongSelection{
+function initSongSelection(){
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://uws-songbook-svr.onrender.com/listArtists'); // Replace with your API endpoint
 
