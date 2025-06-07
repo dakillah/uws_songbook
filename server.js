@@ -28,18 +28,6 @@ const client = new MongoClient(uri, {
   }
 });
 
-app.get('/listSongs', async function (req, res)
-{
-    const client = new MongoClient(uri);
-    
-    await client.connect();
-    const db = client.db("songlist");
-    const collection = db.collection("scores");
-
-    const songsList = await collection.find().sort({artist : 1, title : 1}).toArray();
-
-    res.json(songsList);
-})
 
 app.get('/listArtists', async function (req, res)
 {
@@ -49,11 +37,42 @@ app.get('/listArtists', async function (req, res)
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
-    const queryRes = await collection.find({}, { _id : 1, artist : 1, title : 1 }).sort({ artist : 1, title : 1 }).toArray();
+    const queryRes = await collection.find({}, { "_id" : 0, "title" : 0, "lyrics" : 0, "chords" : 0 }).sort({ "artist" : 1 }).toArray();
 
     res.json(queryRes);
 })
 
+app.get('/listTitles', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("scores");
+
+    const queryRes = await collection.find({}, { "_id" : 0, "artist" : 0, "lyrics" : 0, "chords" : 0  }).sort({ "title" : 1 }).toArray();
+
+    res.json(queryRes);
+})
+
+app.get('/getLyrics', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("scores");
+
+    const queryArtist = req.query.artist;
+    const queryTitle = req.query.title;
+
+
+    console.log("getLyrics?artist=" + queryArtist + "&title=" + queryTitle);
+
+    const queryRes = await collection.find({ artist : queryArtist, title : queryTitle });
+
+    res.json(queryRes);
+})
 
 var server = app.listen(port, function () 
 {
