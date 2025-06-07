@@ -196,8 +196,37 @@ function loadAndDisplaySong(fileIndex) {
 
 // Song Dropdown Change Listener
 songDropdown.addEventListener('change', function(event) {
-    const selectedFileIndex = event.target.value;
-    loadAndDisplaySong(selectedFileIndex);
+    const songTitle = event.target.value;
+
+    const xhr = new XMLHttpRequest();
+    const httpQuery = "https://uws-songbook-svr.onrender.com/listArtists?title=" + songTitle;
+    xhr.open('GET', httpQuery); // Replace with your API endpoint
+
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const data = JSON.parse(xhr.responseText);
+            console.log(data);
+    
+            data.forEach((song, index) => {
+        
+                console.log("Adding: <" + song.artist + "> to Title Dropdown Box");
+        
+                const option = document.createElement('option');
+                option.textContent = song.artist;
+                option.value = song.artist;
+                artistDropdown.appendChild(option);
+            });
+    
+        } else {
+            console.error("Request failed. Status:", xhr.status);
+        }
+    };
+    xhr.onerror = function() {
+        console.error("Request failed");
+    };
+
+    xhr.send();
+
 });
 
 
