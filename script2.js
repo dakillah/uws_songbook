@@ -219,8 +219,8 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 }
 // --- END: Event Listeners for Scroll Controls ---
 
-// --- START: Event Listener for Go Button ---
-goButton.addEventListener("click", function(event){
+// --- START: Go Button event handler ---
+function retrieveAndDisplaySong() {
     const songTitle = songDropdown.value;
     const songArtist = artistDropdown.value;
 
@@ -244,7 +244,7 @@ goButton.addEventListener("click", function(event){
         console.error("Request failed");
     };
 
-});
+}
 // --- END: Event Listener for Go Button ---
 
 // --- START: Retrieve Artist and Songs List via REST API ---
