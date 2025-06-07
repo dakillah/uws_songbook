@@ -69,7 +69,7 @@ app.get('/getLyrics', async function (req, res)
 
     console.log("getLyrics?artist=" + queryArtist + "&title=" + queryTitle);
 
-    const queryRes = await collection.find({ artist : queryArtist, title : queryTitle });
+    const queryRes = await collection.find({ artist : queryArtist, title : queryTitle }).toArray();
 
     console.log("queryRes=", queryRes);
 
