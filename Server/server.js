@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
 
 const port = process.env.PORT || 3001;
 
@@ -16,14 +15,6 @@ const client = new MongoClient(uri, {
   }
 });
 
-const corsOptions = {
-    origin: 'https://uws-songbook-svr.onrender.com/listSongs', // Replace with your app's domain
-    methods: ['GET'], // Specify supported methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
-};
-
-app.use(cors(corsOptions));
-
 app.get('/listSongs', async function (req, res)
 {
     const client = new MongoClient(uri);
@@ -38,6 +29,27 @@ app.get('/listSongs', async function (req, res)
     res.json(songsList);
 })
 
+
+app.get('/listArtists', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("scores");
+
+    songsList = await collection.find(
+        {},
+        { _id : 1, 
+          artist : 1, 
+          title : 1, 
+          lyrics : 0, 
+          chords : 0 
+        }
+    ).sort({artist : 1, title : 1}).toArray();
+
+    res.json(songsList);
+})
 
 
 var server = app.listen(port, function () 
