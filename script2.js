@@ -226,7 +226,7 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 // --- START: Retrieve Artist and Songs List via REST API ---
 function initSongSelection(){
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://uws-songbook-svr.onrender.com/listArtists'); // Replace with your API endpoint
+    xhr.open('GET', 'https://uws-songbook-svr.onrender.com/listTitles'); // Replace with your API endpoint
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
