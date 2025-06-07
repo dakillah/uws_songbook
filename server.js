@@ -29,6 +29,13 @@ app.get('/listSongs', async function (req, res)
     res.json(songsList);
 })
 
+app.get("/*", function (req, res) {
+    res.sendFile(path.join(__dirname, "./index.html"));
+});
+
+app.get("/index2.html", function (req, res) {
+    res.sendFile(path.join(__dirname, "./index2.html"));
+});
 
 app.get('/listArtists', async function (req, res)
 {
