@@ -1,4 +1,4 @@
-require("dotenv").config();
+const path = require('path')
 
 const express = require('express');
 const app = express();
@@ -26,7 +26,6 @@ app.get('/listSongs', async function (req, res)
     const collection = db.collection("scores");
 
     songsList = await collection.find().sort({artist : 1, title : 1}).toArray();
-    //console.log("Songs List: ", songsList);
 
     res.json(songsList);
 })
@@ -64,10 +63,6 @@ app.get('/listArtists', async function (req, res)
 var server = app.listen(port, function () 
 {
     const client = new MongoClient(uri);
-
-
-    //console.log("Host: ", host);
-    //console.log("Port: ", port);
 
     console.log("Listening...")
 })
