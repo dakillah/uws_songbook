@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ukulele Wednesday SG</title> <!-- Changed title slightly -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
 </head>
 <body>
     <div class="container">
@@ -14,11 +14,19 @@
         <!-- PREVIOUSLY was: <div class="song-selector-container"> -->
         <!-- We can rename it or add styles to make it behave like folder-selector-group -->
         <div class="song-selector-group"> <!-- Optional: new class or reuse folder-selector-group if styles are identical -->
-            <label for="songDropdown">Choose a song:</label>
+            <label for="artistDropdown">Artist:</label>
+            <select id="artistDropdown">
+                <option value="">-- Select artist --</option>
+                <!-- Song options will be populated here by script.js -->
+            </select>
+
+            <label for="songDropdown">Title:</label>
             <select id="songDropdown">
                 <option value="">-- Select a Song --</option>
                 <!-- Song options will be populated here by script.js -->
             </select>
+
+           <button type="button">Let's Jam!</button>
         </div>
         <!-- END OF MODIFICATION -->
 
@@ -52,6 +60,6 @@
         </div>
     </div>
 
-    <script src="script.js" defer></script>
+    <script src="script2.js" defer></script>
 </body>
 </html>
