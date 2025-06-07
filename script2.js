@@ -254,6 +254,8 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 
 // --- START: Retrieve Artist and Songs List via REST API ---
 function initSongSelection(){
+    songDropdown.options.length = 1;
+
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://uws-songbook-svr.onrender.com/listTitles'); // Replace with your API endpoint
 
@@ -271,6 +273,10 @@ function initSongSelection(){
                 option.value = song.title;
                 songDropdown.appendChild(option);
             });
+
+            if(songDropdown.options.length == 2){
+                songDropdown.selectedIndex = 1;
+            }
 
         } else {
             console.error("Request failed. Status:", xhr.status);
