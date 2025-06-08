@@ -244,6 +244,7 @@ function retrieveAndDisplaySong(){
         console.error("Request failed");
     };
 
+    xhr.send();
 }
 // --- END: Event Listener for Go Button ---
 
