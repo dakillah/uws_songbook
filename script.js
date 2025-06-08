@@ -263,8 +263,8 @@ function initSongSelection(){
                 console.log("Adding: <" + song.title + "> to Title Dropdown Box");
 
                 const option = document.createElement('option');
-                option.textContent = song.title;
-                option.value = song.title;
+                option.textContent = song;
+                option.value = song;
                 songDropdown.appendChild(option);
             });
 
