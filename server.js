@@ -54,7 +54,7 @@ app.get('/listDistinctArtists', async function (req, res)
 
     const queryTitle = req.query.title;
 
-    const queryRes = await collection.distinct( "artist", { title : queryTitle }).sort({ artist : 1 }).toArray();
+    const queryRes = await collection.distinct( "artist", { title : queryTitle });
 
     res.json(queryRes);
 })
@@ -80,7 +80,7 @@ app.get('/listDistinctTitles', async function (req, res)
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
-    const queryRes = await collection.distinct( "title" ).sort({ title : 1 }).toArray();
+    const queryRes = await collection.distinct( "title" );
 
     res.json(queryRes);
 })
