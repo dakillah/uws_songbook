@@ -158,6 +158,28 @@ function displaySongData(songData) {
     songDetailsContainer.style.display = 'block';
 }
 
+// --- START: Event Listeners for Scroll Controls ---
+if (startScrollButton && stopScrollButton && resetScrollButton) {
+    startScrollButton.addEventListener('click', startLyricsScroll);
+    stopScrollButton.addEventListener('click', stopLyricsScroll);
+    resetScrollButton.addEventListener('click', resetLyricsScroll);
+} else {
+    console.error("One or more main scroll buttons not found.");
+}
+
+// Event Listener for Speed Control
+if (scrollSpeedInput && scrollSpeedValueSpan) {
+    // Set initial speed display and currentScrollSpeed from default slider value
+    currentScrollSpeed = parseInt(scrollSpeedInput.value) || 1;
+    scrollSpeedValueSpan.textContent = currentScrollSpeed;
+
+    scrollSpeedInput.addEventListener('input', updateScrollSpeed);
+    console.log("Scroll speed control listener attached.");
+} else {
+    console.error("Scroll speed input or value span not found.");
+}
+// --- END: Event Listeners for Scroll Controls ---
+
 // Song Dropdown Change Listener
 function handleSongChangeEvent(event) {
     const songTitle = event.target.value;
@@ -239,28 +261,6 @@ function handleArtistChangeEvent(event) {
 
 }
 
-// --- START: Event Listeners for Scroll Controls ---
-if (startScrollButton && stopScrollButton && resetScrollButton) {
-    startScrollButton.addEventListener('click', startLyricsScroll);
-    stopScrollButton.addEventListener('click', stopLyricsScroll);
-    resetScrollButton.addEventListener('click', resetLyricsScroll);
-} else {
-    console.error("One or more main scroll buttons not found.");
-}
-
-// Event Listener for Speed Control
-if (scrollSpeedInput && scrollSpeedValueSpan) {
-    // Set initial speed display and currentScrollSpeed from default slider value
-    currentScrollSpeed = parseInt(scrollSpeedInput.value) || 1;
-    scrollSpeedValueSpan.textContent = currentScrollSpeed;
-
-    scrollSpeedInput.addEventListener('input', updateScrollSpeed);
-    console.log("Scroll speed control listener attached.");
-} else {
-    console.error("Scroll speed input or value span not found.");
-}
-// --- END: Event Listeners for Scroll Controls ---
-
 // --- START: Toggle Button event handler ---
 function toggleSelection(){
     songDropdown.options.length = 1;
@@ -272,13 +272,13 @@ function toggleSelection(){
         selectionSwitchLabel.style.color = "black";
         songDropdown.removeEventListener('change', handleSongChangeEvent);
         initArtistSelection();
-        songDropdown.addEventListener('change', handleArtistChangeEvent);
+        artistDropdown.addEventListener('change', handleArtistChangeEvent);
 
     } else {
 
         console.log("Not Toggled!");
         selectionSwitchLabel.style.color = "lightgray";
-        songDropdown.removeEventListener('change', handleArtistChangeEvent);
+        artistDropdown.removeEventListener('change', handleArtistChangeEvent);
         initSongSelection();
         songDropdown.addEventListener('change', handleSongChangeEvent);
     }
