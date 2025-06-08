@@ -245,7 +245,7 @@ function handleArtistChangeEvent(event) {
                 songDropdown.appendChild(option);
             });
 
-            if(artistDropdown.options.length == 2){
+            if(songDropdown.options.length == 2){
                 songDropdown.selectedIndex = 1;
             }
 
