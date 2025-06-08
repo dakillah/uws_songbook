@@ -13,7 +13,14 @@
         <!-- MODIFIED: Replaced <ul> with <select> -->
         <!-- PREVIOUSLY was: <div class="song-selector-container"> -->
         <!-- We can rename it or add styles to make it behave like folder-selector-group -->
-        <div class="song-selector-group"> <!-- Optional: new class or reuse folder-selector-group if styles are identical -->
+        <div class="search-selector-group">
+            <label class="switch">
+                <input id="selectionSwitch" type="checkbox" onclick="toggleSelection()">
+                <span class="slider round"></span>
+           </label>
+           <label id="selectionSwitchLabel" for="switch">Search by Artist instead!</label>
+        </div>
+        <div id="songSelect" class="song-selector-group"> <!-- Optional: new class or reuse folder-selector-group if styles are identical -->
 
             <label for="songDropdown">Title:</label>
             <select id="songDropdown">

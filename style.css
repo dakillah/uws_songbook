@@ -142,23 +142,6 @@ ul#songList a:hover {
     text-align: center;
 }
 
-.song-selector-group button {
-    padding: 8px 12px;
-    border: 2px solid cornflowerblue;
-    border-radius: 12px;
-    color: black;
-    background-color: white;
-    font-size: 1em;
-    display: inline-block;
-    min-width: 150px; /* Adjust as needed */
-    transition-duration: 0.4s;
-}
-
-.song-selector-group button:hover {
-  background-color: cornflowerblue;
-  color: white;
-}
-
 /* You can also style the label for the dropdown if you like */
 .song-selector-container label {
     display: block; /* Make it take its own line if not already */
@@ -211,24 +194,76 @@ ul#songList a:hover {
     font-weight: bold;
 }
 
-.folder-selector-group {
-    display: flex; /* Arranges children in a row */
-    align-items: center; /* Vertically aligns items in the middle (optional but good) */
-    gap: 10px; /* Adds a small space between the label and input (optional) */
-    margin-bottom: 20px; /* Keeps the original bottom margin you had on the input */
+/* --- Styles for the search selector group --- */
+.search-selector-group {
+    display: flex;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+    gap: 10px;           /* Space between the label and the select dropdown */
+    margin-bottom: 0px; /* Space below this group */
 }
 
-/* If your global label style is 'display: block',
-   you might need to revert it for THIS label if the flex container isn't enough,
-   or adjust its margin. But usually, flexbox handles it. */
-.folder-selector-group label {
-    /* display: inline-block; /* Usually not needed with flex */
-    margin-bottom: 0; /* Remove bottom margin if it was set globally for labels */
-    font-weight: bold; /* Retain bold if it was there */
+.search-selector-group label{
+    color: lightgray;
 }
 
-.folder-selector-group input[type="file"] {
-    margin-bottom: 0; /* Remove bottom margin as it's now on the group */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 24px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .1s;
+  transition: .1s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .1s;
+  transition: .1s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(21px);
+  -ms-transform: translateX(21px);
+  transform: translateX(21px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 
 /* --- Styles for the song selector group --- */
@@ -256,4 +291,21 @@ ul#songList a:hover {
     /* The existing #songDropdown styles for padding, border, etc., will still apply.
        No need to change margin-bottom here if the group has margin-bottom. */
     /* min-width: 250px; /* This was from your original #songDropdown style, keep if desired */
+}
+
+.song-selector-group button {
+    padding: 8px 12px;
+    border: 2px solid cornflowerblue;
+    border-radius: 12px;
+    color: black;
+    background-color: white;
+    font-size: 1em;
+    display: inline-block;
+    min-width: 150px; /* Adjust as needed */
+    transition-duration: 0.4s;
+}
+
+.song-selector-group button:hover {
+  background-color: cornflowerblue;
+  color: white;
 }

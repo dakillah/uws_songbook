@@ -1,7 +1,10 @@
 const artistDropdown = document.getElementById('artistDropdown');
 const songDropdown = document.getElementById('songDropdown');
-const goButton = document.getElementById('goButton');
 const noSongsMessageP = document.getElementById('noSongsMessage');
+const selectionSwitch = document.getElementById('selectionSwitch');
+const selectionSwitchLabel = document.getElementById('selectionSwitchLabel');
+const songSelectorGroup = document.getElementById('songSelect');
+const artistSelectorGroup = document.getElementById('artistSelect');
 
 // Song details elements
 const songDetailsContainer = document.getElementById('songDetailsContainer');
@@ -155,48 +158,6 @@ function displaySongData(songData) {
     songDetailsContainer.style.display = 'block';
 }
 
-// Song Dropdown Change Listener
-songDropdown.addEventListener('change', function(event) {
-    const songTitle = event.target.value;
-
-    const xhr = new XMLHttpRequest();
-    const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctArtists?title=" + songTitle;
-    xhr.open('GET', httpQuery); // Replace with your API endpoint
-
-    artistDropdown.options.length = 1;
-
-    xhr.onload = function() {
-        if (xhr.status >= 200 && xhr.status < 300) {
-            const data = JSON.parse(xhr.responseText);
-            console.log(data);
-    
-            data.forEach((artist, index) => {
-        
-                console.log("Adding: <" + artist + "> to Title Dropdown Box");
-        
-                const option = document.createElement('option');
-                option.textContent = artist;
-                option.value = artist;
-                artistDropdown.appendChild(option);
-            });
-    
-            if(artistDropdown.options.length == 2){
-                artistDropdown.selectedIndex = 1;
-            }
-
-        } else {
-            console.error("Request failed. Status:", xhr.status);
-        }
-    };
-    xhr.onerror = function() {
-        console.error("Request failed");
-    };
-
-    xhr.send();
-
-});
-
-
 // --- START: Event Listeners for Scroll Controls ---
 if (startScrollButton && stopScrollButton && resetScrollButton) {
     startScrollButton.addEventListener('click', startLyricsScroll);
@@ -218,6 +179,110 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
     console.error("Scroll speed input or value span not found.");
 }
 // --- END: Event Listeners for Scroll Controls ---
+
+// Song Dropdown Change Listener
+function handleSongChangeEvent(event) {
+    const songTitle = event.target.value;
+
+    const xhr = new XMLHttpRequest();
+    const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctArtists?title=" + songTitle;
+    xhr.open('GET', httpQuery); // Replace with your API endpoint
+
+    artistDropdown.options.length = 1;
+
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const data = JSON.parse(xhr.responseText);
+            console.log(data);
+    
+            data.forEach((artist, index) => {
+        
+                console.log("Adding: <" + artist + "> to Artist Dropdown Box");
+        
+                const option = document.createElement('option');
+                option.textContent = artist;
+                option.value = artist;
+                artistDropdown.appendChild(option);
+            });
+    
+            if(artistDropdown.options.length == 2){
+                artistDropdown.selectedIndex = 1;
+            }
+
+        } else {
+            console.error("Request failed. Status:", xhr.status);
+        }
+    };
+    xhr.onerror = function() {
+        console.error("Request failed");
+    };
+
+    xhr.send();
+
+}
+
+function handleArtistChangeEvent(event) {
+    const artist = event.target.value;
+
+    const xhr = new XMLHttpRequest();
+    const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctTitles?artist=" + artist;
+    xhr.open('GET', httpQuery); // Replace with your API endpoint
+
+    songDropdown.options.length = 1;
+
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const data = JSON.parse(xhr.responseText);
+            console.log(data);
+
+            data.forEach((song, index) => {
+
+                console.log("Adding: <" + song + "> to Title Dropdown Box");
+
+                const option = document.createElement('option');
+                option.textContent = song;
+                option.value = song;
+                songDropdown.appendChild(option);
+            });
+
+            if(songDropdown.options.length == 2){
+                songDropdown.selectedIndex = 1;
+            }
+
+        } else {
+            console.error("Request failed. Status:", xhr.status);
+        }
+    };
+    xhr.onerror = function() {
+        console.error("Request failed");
+    };
+
+    xhr.send();
+
+}
+
+// --- START: Toggle Button event handler ---
+function toggleSelection(){
+    songDropdown.options.length = 1;
+    artistDropdown.options.length = 1;
+
+    if(selectionSwitch.checked == true) {
+        
+        console.log("Toggled!");
+        selectionSwitchLabel.style.color = "black";
+        songDropdown.removeEventListener('change', handleSongChangeEvent);
+        initArtistSelection();
+
+    } else {
+
+        console.log("Not Toggled!");
+        selectionSwitchLabel.style.color = "lightgray";
+        artistDropdown.removeEventListener('change', handleArtistChangeEvent);
+        initSongSelection();
+    }
+
+}
+// --- END: Toggle Button event handler ---
 
 // --- START: Go Button event handler ---
 function retrieveAndDisplaySong(){
@@ -248,8 +313,9 @@ function retrieveAndDisplaySong(){
 }
 // --- END: Event Listener for Go Button ---
 
-// --- START: Retrieve Artist and Songs List via REST API ---
-function initSongSelection(){
+// --- START: Retrieve Songs List via REST API ---
+function initSongSelection() {
+    
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://uws-songbook-svr.onrender.com/listTitles'); // Replace with your API endpoint
 
@@ -268,6 +334,8 @@ function initSongSelection(){
                 songDropdown.appendChild(option);
             });
 
+            songDropdown.addEventListener('change', handleSongChangeEvent);
+
         } else {
             console.error("Request failed. Status:", xhr.status);
         }
@@ -278,4 +346,39 @@ function initSongSelection(){
 
     xhr.send();
 }
-// --- END: Retrieve Artist and Songs List via REST API ---
+// --- END: Retrieve Songs List via REST API ---
+
+// --- START: Retrieve Artist List via REST API ---
+function initArtistSelection() {
+   
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://uws-songbook-svr.onrender.com/listArtists'); // Replace with your API endpoint
+
+    xhr.onload = function() {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            const data = JSON.parse(xhr.responseText);
+            console.log(data);
+
+            data.forEach((artist, index) => {
+
+                console.log("Adding: <" + artist + "> to Title Dropdown Box");
+
+                const option = document.createElement('option');
+                option.textContent = artist;
+                option.value = artist;
+                artistDropdown.appendChild(option);
+            });
+
+            artistDropdown.addEventListener('change', handleArtistChangeEvent);
+
+        } else {
+            console.error("Request failed. Status:", xhr.status);
+        }
+    };
+    xhr.onerror = function() {
+        console.error("Request failed");
+    };
+
+    xhr.send();
+}
+// --- END: Retrieve Artist List via REST API ---
