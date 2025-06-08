@@ -44,6 +44,21 @@ app.get('/listArtists', async function (req, res)
     res.json(queryRes);
 })
 
+app.get('/listDistinctArtists', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("scores");
+
+    const queryTitle = req.query.title;
+
+    const queryRes = await collection.distinct( "artist", { title : queryTitle }).sort({ artist : 1 }).toArray();
+
+    res.json(queryRes);
+})
+
 app.get('/listTitles', async function (req, res)
 {
     const client = new MongoClient(uri);
@@ -53,6 +68,19 @@ app.get('/listTitles', async function (req, res)
     const collection = db.collection("scores");
 
     const queryRes = await collection.find({ }, { _id : 0, artist : 0, lyrics : 0, chords : 0  }).sort({ title : 1 }).toArray();
+
+    res.json(queryRes);
+})
+
+app.get('/listDistinctTitles', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("scores");
+
+    const queryRes = await collection.distinct( "title" ).sort({ title : 1 }).toArray();
 
     res.json(queryRes);
 })
