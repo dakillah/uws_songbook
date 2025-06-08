@@ -272,7 +272,6 @@ function toggleSelection(){
         selectionSwitchLabel.style.color = "black";
         songDropdown.removeEventListener('change', handleSongChangeEvent);
         initArtistSelection();
-        artistDropdown.addEventListener('change', handleArtistChangeEvent);
 
     } else {
 
@@ -280,7 +279,6 @@ function toggleSelection(){
         selectionSwitchLabel.style.color = "lightgray";
         artistDropdown.removeEventListener('change', handleArtistChangeEvent);
         initSongSelection();
-        songDropdown.addEventListener('change', handleSongChangeEvent);
     }
 
 }
@@ -336,6 +334,8 @@ function initSongSelection() {
                 songDropdown.appendChild(option);
             });
 
+            songDropdown.addEventListener('change', handleSongChangeEvent);
+
         } else {
             console.error("Request failed. Status:", xhr.status);
         }
@@ -359,15 +359,17 @@ function initArtistSelection() {
             const data = JSON.parse(xhr.responseText);
             console.log(data);
 
-            data.forEach((song, index) => {
+            data.forEach((artist, index) => {
 
-                console.log("Adding: <" + song + "> to Title Dropdown Box");
+                console.log("Adding: <" + artist + "> to Title Dropdown Box");
 
                 const option = document.createElement('option');
-                option.textContent = song;
-                option.value = song;
+                option.textContent = artist;
+                option.value = artist;
                 artistDropdown.appendChild(option);
             });
+
+            artistDropdown.addEventListener('change', handleArtistChangeEvent);
 
         } else {
             console.error("Request failed. Status:", xhr.status);
