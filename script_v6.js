@@ -228,7 +228,7 @@ function handleArtistChangeEvent(event) {
     const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctTitles?artist=" + artist;
     xhr.open('GET', httpQuery); // Replace with your API endpoint
 
-    artistDropdown.options.length = 1;
+    songDropdown.options.length = 1;
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
