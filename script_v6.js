@@ -213,7 +213,7 @@ function handleArtistChangeEvent(event) {
             const data = JSON.parse(xhr.responseText);
             console.log(data);
 
-            data.forEach(song, index) => {
+            data.forEach((song, index) => {
 
                 console.log("Adding: <" + song + "> to Title Dropdown Box");
 
