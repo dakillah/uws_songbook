@@ -160,7 +160,7 @@ songDropdown.addEventListener('change', function(event) {
     const songTitle = event.target.value;
 
     const xhr = new XMLHttpRequest();
-    const httpQuery = "https://uws-songbook-svr.onrender.com/listArtists?title=" + songTitle;
+    const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctArtists?title=" + songTitle;
     xhr.open('GET', httpQuery); // Replace with your API endpoint
 
     artistDropdown.options.length = 1;
@@ -170,13 +170,13 @@ songDropdown.addEventListener('change', function(event) {
             const data = JSON.parse(xhr.responseText);
             console.log(data);
     
-            data.forEach((song, index) => {
+            data.forEach((artist, index) => {
         
-                console.log("Adding: <" + song.artist + "> to Title Dropdown Box");
+                console.log("Adding: <" + artist + "> to Title Dropdown Box");
         
                 const option = document.createElement('option');
-                option.textContent = song.artist;
-                option.value = song.artist;
+                option.textContent = artist;
+                option.value = artist;
                 artistDropdown.appendChild(option);
             });
     
@@ -260,7 +260,7 @@ function initSongSelection(){
 
             data.forEach((song, index) => {
 
-                console.log("Adding: <" + song.title + "> to Title Dropdown Box");
+                console.log("Adding: <" + song + "> to Title Dropdown Box");
 
                 const option = document.createElement('option');
                 option.textContent = song;
