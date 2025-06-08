@@ -101,7 +101,7 @@ ul#songList a:hover {
     white-space: pre-wrap; /* Allows lines to wrap */
     word-wrap: break-word;
     /* ADDED/MODIFIED FOR SCROLLING: */
-    max-height: 400px;  /* Or e.g., 20em, 40vh - Adjust to your liking */
+    max-height: 600px;  /* Or e.g., 20em, 40vh - Adjust to your liking */
     overflow-y: auto;   /* Allows vertical scrollbar when content overflows */
 }
 
@@ -120,14 +120,43 @@ ul#songList a:hover {
     font-style: italic;
 }
 
-#songDropdown {
+#artistDropdown {
     padding: 8px 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 12px;
     background-color: white;
     font-size: 1em;
     min-width: 250px; /* Adjust as needed */
     cursor: pointer;
+    text-align: center;
+}
+
+#songDropdown {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: white;
+    font-size: 1em;
+    min-width: 250px; /* Adjust as needed */
+    cursor: pointer;
+    text-align: center;
+}
+
+.song-selector-group button {
+    padding: 8px 12px;
+    border: 2px solid cornflowerblue;
+    border-radius: 12px;
+    color: black;
+    background-color: white;
+    font-size: 1em;
+    display: inline-block;
+    min-width: 200px; /* Adjust as needed */
+    transition-duration: 0.4s;
+}
+
+.song-selector-group button:hover {
+  background-color: cornflowerblue;
+  color: white;
 }
 
 /* You can also style the label for the dropdown if you like */
@@ -218,6 +247,12 @@ ul#songList a:hover {
 }
 
 .song-selector-group select#songDropdown {
+    /* The existing #songDropdown styles for padding, border, etc., will still apply.
+       No need to change margin-bottom here if the group has margin-bottom. */
+    /* min-width: 250px; /* This was from your original #songDropdown style, keep if desired */
+}
+
+.song-selector-group select#artistDropdown {
     /* The existing #songDropdown styles for padding, border, etc., will still apply.
        No need to change margin-bottom here if the group has margin-bottom. */
     /* min-width: 250px; /* This was from your original #songDropdown style, keep if desired */

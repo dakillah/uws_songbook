@@ -4,26 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ukulele Wednesday SG</title> <!-- Changed title slightly -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
 </head>
-<body>
+<body onload="initSongSelection()">
     <div class="container">
         <h1>Ukulele Wednesday SG</h1>
 
-        <div class="folder-selector-group">
-			<label for="folderInput">Select "songs" folder:</label>
-			<input type="file" id="folderInput" webkitdirectory directory>
-		</div>
-		
         <!-- MODIFIED: Replaced <ul> with <select> -->
         <!-- PREVIOUSLY was: <div class="song-selector-container"> -->
         <!-- We can rename it or add styles to make it behave like folder-selector-group -->
         <div class="song-selector-group"> <!-- Optional: new class or reuse folder-selector-group if styles are identical -->
-            <label for="songDropdown">Choose a song:</label>
+
+            <label for="songDropdown">Title:</label>
             <select id="songDropdown">
                 <option value="">-- Select a Song --</option>
                 <!-- Song options will be populated here by script.js -->
             </select>
+
+            <label for="artistDropdown">Artist:</label>
+            <select id="artistDropdown">
+                <option value="">-- Select artist --</option>
+                <!-- Song options will be populated here by script.js -->
+            </select>
+
+           <button onclick="retrieveAndDisplaySong()" type="button">Let's Jam!</button>
         </div>
         <!-- END OF MODIFICATION -->
 
