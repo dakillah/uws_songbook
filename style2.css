@@ -101,7 +101,7 @@ ul#songList a:hover {
     white-space: pre-wrap; /* Allows lines to wrap */
     word-wrap: break-word;
     /* ADDED/MODIFIED FOR SCROLLING: */
-    max-height: 400px;  /* Or e.g., 20em, 40vh - Adjust to your liking */
+    max-height: 600px;  /* Or e.g., 20em, 40vh - Adjust to your liking */
     overflow-y: auto;   /* Allows vertical scrollbar when content overflows */
 }
 
@@ -126,7 +126,7 @@ ul#songList a:hover {
     border-radius: 12px;
     background-color: white;
     font-size: 1em;
-    min-width: 450px; /* Adjust as needed */
+    min-width: 250px; /* Adjust as needed */
     cursor: pointer;
     text-align: center;
 }
@@ -137,7 +137,7 @@ ul#songList a:hover {
     border-radius: 12px;
     background-color: white;
     font-size: 1em;
-    min-width: 450px; /* Adjust as needed */
+    min-width: 250px; /* Adjust as needed */
     cursor: pointer;
     text-align: center;
 }
