@@ -268,10 +268,11 @@ function toggleSelection(){
     primarySelectionDropdown.options.length = 0;
     secondarySelectionDropdown.options.length = 0;
 
-    const selectSong = document.createElement('option1');
+    const selectSong = document.createElement('option');
     selectSong.textContent = "-- Select a Song --";
     selectSong.value = "-- Select a Song --";
-    const selectArtist = document.createElement('option2');
+
+    const selectArtist = document.createElement('option');
     selectSong.textContent = "-- Select Artist --";
     selectSong.value = "-- Select Artist --";
 
