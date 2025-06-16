@@ -5,8 +5,8 @@ const selectionSwitch = document.getElementById('selectionSwitch');
 const selectionSwitchLabel = document.getElementById('selectionSwitchLabel');
 const songSelectorGroup = document.getElementById('songSelect');
 const artistSelectorGroup = document.getElementById('artistSelect');
-const selection-label1 = document.getElementById('selection-label1');
-const selection-label2 = document.getElementById('selection-label2');
+const selectionLabel1 = document.getElementById(''selection-label1);
+const selectionLabel2 = document.getElementById(''selection-label2);
 
 // Song details elements
 const songDetailsContainer = document.getElementById('songDetailsContainer');
@@ -272,8 +272,8 @@ function toggleSelection(){
         
         console.log("Toggled!");
         selectionSwitchLabel.style.color = "black";
-        selection-label1.textContent = "Artist";
-        selection-label2.textContent = "Title:";
+        selectionLabel1.textContent = "Artist";
+        selectionLabel2.textContent = "Title:";
         songDropdown.removeEventListener('change', handleSongChangeEvent);
         initArtistSelection();
 
@@ -281,8 +281,8 @@ function toggleSelection(){
 
         console.log("Not Toggled!");
         selectionSwitchLabel.style.color = "lightgray";
-        selection-label1.textContent = "Title:";
-        selection-label2.textContent = "Artist:";
+        selectionLabel1.textContent = "Title:";
+        selectionLabel2.textContent = "Artist:";
         artistDropdown.removeEventListener('change', handleArtistChangeEvent);
         initSongSelection();
     }
