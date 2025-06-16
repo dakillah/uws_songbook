@@ -190,7 +190,7 @@ function handleSongChangeEvent(event) {
     const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctArtists?title=" + songTitle;
     xhr.open('GET', httpQuery); // Replace with your API endpoint
 
-    primarySelectionDropdown.options.length = 1;
+    secondarySelectionDropdown.options.length = 1;
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -230,7 +230,7 @@ function handleArtistChangeEvent(event) {
     const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctTitles?artist=" + artist;
     xhr.open('GET', httpQuery); // Replace with your API endpoint
 
-    primarySelectionDropdown.options.length = 1;
+    secondarySelectionDropdown.options.length = 1;
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -268,12 +268,21 @@ function toggleSelection(){
     primarySelectionDropdown.options.length = 0;
     secondarySelectionDropdown.options.length = 0;
 
+    const selectSong = document.createElement('option1');
+    selectSong.textContent = "-- Select a Song --";
+    selectSong.value = "-- Select a Song --";
+    const selectArtist = document.createElement('option2');
+    selectSong.textContent = "-- Select Artist --";
+    selectSong.value = "-- Select Artist --";
+
     if(selectionSwitch.checked == true) {
         
         console.log("Toggled!");
         selectionSwitchLabel.style.color = "black";
         selectionLabel1.textContent = "Artist";
         selectionLabel2.textContent = "Title:";
+        primarySelectionDropdown.appendChild(selectArtist);
+        secondarySelectionDropdown.appendChild(selectSong);
         primarySelectionDropdown.removeEventListener('change', handleSongChangeEvent);
         initArtistSelection();
 
@@ -283,6 +292,8 @@ function toggleSelection(){
         selectionSwitchLabel.style.color = "lightgray";
         selectionLabel1.textContent = "Title:";
         selectionLabel2.textContent = "Artist:";
+        primarySelectionDropdown.appendChild(selectSong);
+        secondarySelectionDropdown.appendChild(selectArtist);
         primarySelectionDropdown.removeEventListener('change', handleArtistChangeEvent);
         initSongSelection();
     }
