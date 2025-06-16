@@ -1,5 +1,5 @@
-const artistDropdown = document.getElementById('artistDropdown');
-const songDropdown = document.getElementById('songDropdown');
+const primarySelectionDropdown = document.getElementById('primarySelectionDropdown');
+const secondarySelectionDropdown = document.getElementById('secondarySelectionDropdown');
 const noSongsMessageP = document.getElementById('noSongsMessage');
 const selectionSwitch = document.getElementById('selectionSwitch');
 const selectionSwitchLabel = document.getElementById('selectionSwitchLabel');
@@ -190,7 +190,7 @@ function handleSongChangeEvent(event) {
     const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctArtists?title=" + songTitle;
     xhr.open('GET', httpQuery); // Replace with your API endpoint
 
-    artistDropdown.options.length = 1;
+    primarySelectionDropdown.options.length = 1;
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -204,11 +204,11 @@ function handleSongChangeEvent(event) {
                 const option = document.createElement('option');
                 option.textContent = artist;
                 option.value = artist;
-                artistDropdown.appendChild(option);
+                secondarySelectionDropdown.appendChild(option);
             });
     
-            if(artistDropdown.options.length == 2){
-                artistDropdown.selectedIndex = 1;
+            if(secondarySelectionDropdown.options.length == 2){
+                secondarySelectionDropdown.selectedIndex = 1;
             }
 
         } else {
@@ -230,7 +230,7 @@ function handleArtistChangeEvent(event) {
     const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctTitles?artist=" + artist;
     xhr.open('GET', httpQuery); // Replace with your API endpoint
 
-    songDropdown.options.length = 1;
+    primarySelectionDropdown.options.length = 1;
 
     xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
@@ -244,11 +244,11 @@ function handleArtistChangeEvent(event) {
                 const option = document.createElement('option');
                 option.textContent = song;
                 option.value = song;
-                songDropdown.appendChild(option);
+                secondarySelectionDropdown.appendChild(option);
             });
 
-            if(songDropdown.options.length == 2){
-                songDropdown.selectedIndex = 1;
+            if(secondarySelectionDropdown.options.length == 2){
+                secondarySelectionDropdown.selectedIndex = 1;
             }
 
         } else {
@@ -265,8 +265,8 @@ function handleArtistChangeEvent(event) {
 
 // --- START: Toggle Button event handler ---
 function toggleSelection(){
-    songDropdown.options.length = 1;
-    artistDropdown.options.length = 1;
+    primarySelectionDropdown.options.length = 0;
+    secondarySelectionDropdown.options.length = 0;
 
     if(selectionSwitch.checked == true) {
         
@@ -274,7 +274,7 @@ function toggleSelection(){
         selectionSwitchLabel.style.color = "black";
         selectionLabel1.textContent = "Artist";
         selectionLabel2.textContent = "Title:";
-        songDropdown.removeEventListener('change', handleSongChangeEvent);
+        primarySelectionDropdown.removeEventListener('change', handleSongChangeEvent);
         initArtistSelection();
 
     } else {
@@ -283,7 +283,7 @@ function toggleSelection(){
         selectionSwitchLabel.style.color = "lightgray";
         selectionLabel1.textContent = "Title:";
         selectionLabel2.textContent = "Artist:";
-        artistDropdown.removeEventListener('change', handleArtistChangeEvent);
+        primarySelectionDropdown.removeEventListener('change', handleArtistChangeEvent);
         initSongSelection();
     }
 
@@ -292,8 +292,16 @@ function toggleSelection(){
 
 // --- START: Go Button event handler ---
 function retrieveAndDisplaySong(){
-    const songTitle = songDropdown.value;
-    const songArtist = artistDropdown.value;
+    var songTitle;
+    var songArtist;
+    
+    if(electionSwitch.checked == true){
+        songTitle = secondarySelectionDropdown.value;
+        songArtist = primarySelectionDropdown.value;
+    } else {
+        songTitle = primarySelectionDropdown.value;
+        songArtist = secondarySelectionDropdown.value;
+    }
 
     const xhr = new XMLHttpRequest();
     const httpQuery = "https://uws-songbook-svr.onrender.com/getLyrics?artist=" + songArtist + "&title=" + songTitle;
@@ -337,10 +345,10 @@ function initSongSelection() {
                 const option = document.createElement('option');
                 option.textContent = song;
                 option.value = song;
-                songDropdown.appendChild(option);
+                primarySelectionDropdown.appendChild(option);
             });
 
-            songDropdown.addEventListener('change', handleSongChangeEvent);
+            primarySelectionDropdown.addEventListener('change', handleSongChangeEvent);
 
         } else {
             console.error("Request failed. Status:", xhr.status);
@@ -372,10 +380,10 @@ function initArtistSelection() {
                 const option = document.createElement('option');
                 option.textContent = artist;
                 option.value = artist;
-                artistDropdown.appendChild(option);
+                primarySelectionDropdown.appendChild(option);
             });
 
-            artistDropdown.addEventListener('change', handleArtistChangeEvent);
+            primarySelectionDropdown.addEventListener('change', handleArtistChangeEvent);
 
         } else {
             console.error("Request failed. Status:", xhr.status);
