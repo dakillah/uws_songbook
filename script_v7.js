@@ -273,8 +273,8 @@ function toggleSelection(){
     selectSong.value = "-- Select a Song --";
 
     const selectArtist = document.createElement('option');
-    selectSong.textContent = "-- Select Artist --";
-    selectSong.value = "-- Select Artist --";
+    selectArtist.textContent = "-- Select Artist --";
+    selectArtist.value = "-- Select Artist --";
 
     if(selectionSwitch.checked == true) {
         
