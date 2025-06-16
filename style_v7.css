@@ -120,7 +120,7 @@ ul#songList a:hover {
     font-style: italic;
 }
 
-#artistDropdown {
+#secondarySelectionDropdown {
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 12px;
@@ -131,7 +131,7 @@ ul#songList a:hover {
     text-align: center;
 }
 
-#songDropdown {
+#primarySelectionDropdown {
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 12px;
@@ -281,13 +281,13 @@ input:checked + .slider:before {
     /* If you had a global 'label { display: block; }', this flex context overrides it for layout */
 }
 
-.song-selector-group select#songDropdown {
+.song-selector-group select#primarySelectionDropdown {
     /* The existing #songDropdown styles for padding, border, etc., will still apply.
        No need to change margin-bottom here if the group has margin-bottom. */
     /* min-width: 250px; /* This was from your original #songDropdown style, keep if desired */
 }
 
-.song-selector-group select#artistDropdown {
+.song-selector-group select#secondarySelectionDropdown {
     /* The existing #songDropdown styles for padding, border, etc., will still apply.
        No need to change margin-bottom here if the group has margin-bottom. */
     /* min-width: 250px; /* This was from your original #songDropdown style, keep if desired */
