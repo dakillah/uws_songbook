@@ -5,8 +5,8 @@ const selectionSwitch = document.getElementById('selectionSwitch');
 const selectionSwitchLabel = document.getElementById('selectionSwitchLabel');
 const songSelectorGroup = document.getElementById('songSelect');
 const artistSelectorGroup = document.getElementById('artistSelect');
-const selectionLabel1 = document.getElementById(''selection-label1');
-const selectionLabel2 = document.getElementById(''selection-label2');
+const selectionLabel1 = document.getElementById('selection-label1');
+const selectionLabel2 = document.getElementById('selection-label2');
 
 // Song details elements
 const songDetailsContainer = document.getElementById('songDetailsContainer');
