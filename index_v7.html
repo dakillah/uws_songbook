@@ -21,10 +21,13 @@
         <div id="songSelect" class="song-selector-group">
             <div class="song-dropdown-grp">
                 <label id="selection-label1" for="songDropdown">Title:</label>
+                <!--
                 <select id="primarySelectionDropdown">
                     <option value="">-- Select a Song --</option>
-                    <!-- Song options will be populated here by script.js -->
                 </select>
+                -->
+                <input type="text" id="primarySelectionDropdown" onkeyup="processKeyInput()" placeholder="Search for names.." title="Type in a name">
+                    <ul id="primarySelectionList" />
             </div>
 
             <div class="artist-dropdown-grp">

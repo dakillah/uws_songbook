@@ -1,4 +1,5 @@
 const primarySelectionDropdown = document.getElementById('primarySelectionDropdown');
+const primarySelectionList = document.getElementById('primarySelectionList');
 const secondarySelectionDropdown = document.getElementById('secondarySelectionDropdown');
 const noSongsMessageP = document.getElementById('noSongsMessage');
 const selectionSwitch = document.getElementById('selectionSwitch');
@@ -182,6 +183,20 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 }
 // --- END: Event Listeners for Scroll Controls ---
 
+function processKeyInput() {
+    filter = primarySelectionDropdown.value.toUpperCase();
+    li = primarySelectionDropdown.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
 // Song Dropdown Change Listener
 function handleSongChangeEvent(event) {
     const songTitle = event.target.value;
@@ -196,7 +211,12 @@ function handleSongChangeEvent(event) {
         if (xhr.status >= 200 && xhr.status < 300) {
             const data = JSON.parse(xhr.responseText);
             console.log(data);
-    
+  
+            if (event.target.closest('li')) {
+                primarySelectionDropdown.value = event.target.textContent;
+                console.log("Target Matches!");
+            } 
+ 
             data.forEach((artist, index) => {
         
                 console.log("Adding: <" + artist + "> to Artist Dropdown Box");
@@ -237,6 +257,11 @@ function handleArtistChangeEvent(event) {
             const data = JSON.parse(xhr.responseText);
             console.log(data);
 
+            if (event.target.closest('li')) {
+                primarySelectionDropdown.value = event.target.textContent;
+                console.log("Target Matches!");
+            }
+
             data.forEach((song, index) => {
 
                 console.log("Adding: <" + song + "> to Title Dropdown Box");
@@ -265,7 +290,8 @@ function handleArtistChangeEvent(event) {
 
 // --- START: Toggle Button event handler ---
 function toggleSelection(){
-    primarySelectionDropdown.options.length = 0;
+    primarySelectionDropdown.value = "";
+    primarySelectionList.replaceChildren();
     secondarySelectionDropdown.options.length = 0;
 
     const selectSong = document.createElement('option');
@@ -282,9 +308,8 @@ function toggleSelection(){
         selectionSwitchLabel.style.color = "black";
         selectionLabel1.textContent = "Artist";
         selectionLabel2.textContent = "Title:";
-        primarySelectionDropdown.appendChild(selectArtist);
         secondarySelectionDropdown.appendChild(selectSong);
-        primarySelectionDropdown.removeEventListener('change', handleSongChangeEvent);
+        primarySelectionList.removeEventListener('click', handleSongChangeEvent);
         initArtistSelection();
 
     } else {
@@ -293,9 +318,8 @@ function toggleSelection(){
         selectionSwitchLabel.style.color = "lightgray";
         selectionLabel1.textContent = "Title:";
         selectionLabel2.textContent = "Artist:";
-        primarySelectionDropdown.appendChild(selectSong);
         secondarySelectionDropdown.appendChild(selectArtist);
-        primarySelectionDropdown.removeEventListener('change', handleArtistChangeEvent);
+        primarySelectionList.removeEventListener('click', handleArtistChangeEvent);
         initSongSelection();
     }
 
@@ -309,10 +333,10 @@ function retrieveAndDisplaySong(){
     
     if(selectionSwitch.checked == true){
         songTitle = secondarySelectionDropdown.value;
-        songArtist = primarySelectionDropdown.value;
+        songArtist = primarySelectionList.value;
     } else {
         songTitle = primarySelectionDropdown.value;
-        songArtist = secondarySelectionDropdown.value;
+        songArtist = secondarySelectionList.value;
     }
 
     const xhr = new XMLHttpRequest();
@@ -354,13 +378,13 @@ function initSongSelection() {
 
                 console.log("Adding: <" + song + "> to Title Dropdown Box");
 
-                const option = document.createElement('option');
-                option.textContent = song;
-                option.value = song;
-                primarySelectionDropdown.appendChild(option);
+                const primaryLi = document.createElement('li');
+                primaryLi.value = song;
+                primaryLi.style.display = "none";
+                primarySelectionList.appendChild(primaryLi);
             });
 
-            primarySelectionDropdown.addEventListener('change', handleSongChangeEvent);
+            primarySelectionList.addEventListener('click', handleSongChangeEvent);
 
         } else {
             console.error("Request failed. Status:", xhr.status);
@@ -389,13 +413,13 @@ function initArtistSelection() {
 
                 console.log("Adding: <" + artist + "> to Title Dropdown Box");
 
-                const option = document.createElement('option');
-                option.textContent = artist;
-                option.value = artist;
-                primarySelectionDropdown.appendChild(option);
+                const primaryLi = document.createElement('li');
+                primaryLi.value = artist;
+                primaryLi.style.display = "none";
+                primarySelectionList.appendChild(primaryLi);
             });
 
-            primarySelectionDropdown.addEventListener('change', handleArtistChangeEvent);
+            primarySelectionList.addEventListener('click', handleArtistChangeEvent);
 
         } else {
             console.error("Request failed. Status:", xhr.status);
