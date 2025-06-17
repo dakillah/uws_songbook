@@ -307,7 +307,7 @@ function retrieveAndDisplaySong(){
     var songTitle;
     var songArtist;
     
-    if(electionSwitch.checked == true){
+    if(selectionSwitch.checked == true){
         songTitle = secondarySelectionDropdown.value;
         songArtist = primarySelectionDropdown.value;
     } else {
