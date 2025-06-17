@@ -185,7 +185,7 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 
 function processKeyInput() {
     var filter = primarySelectionDropdown.value.toUpperCase();
-    var li = primarySelectionDropdown.getElementsByTagName("li");
+    var li = primarySelectionList.getElementsByTagName("li");
 
     for (i = 0; i < li.length; i++) {
         var a = li[i].getElementsByTagName("a")[0];
