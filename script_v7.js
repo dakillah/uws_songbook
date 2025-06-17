@@ -188,9 +188,8 @@ function processKeyInput() {
     var li = primarySelectionList.getElementsByTagName("li");
 
     for (i = 0; i < li.length; i++) {
-        //var a = li[i].getElementsByTagName("a")[0];
-        //var txtValue = a.textContent || a.innerText;
-        var txtValue = li[i].value.textContent || li[i].value.innerText;
+        var a = li[i].getElementsByTagName("a")[0];
+        var txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
         } else {
@@ -382,8 +381,11 @@ function initSongSelection() {
 
                 console.log("Adding: <" + song + "> to Title List");
 
-                const primaryLi = document.createElement('li');
-                primaryLi.value = song;
+                var primaryLi = document.createElement('li');
+                var a = document.createElement('a');
+                a.href = "#";
+                a.textContent = song;
+                primaryLi.appendChild(a);
                 primaryLi.style.display = "none";
                 primarySelectionList.appendChild(primaryLi);
             });
@@ -417,8 +419,11 @@ function initArtistSelection() {
 
                 console.log("Adding: <" + artist + "> to Title Dropdown Box");
 
-                const primaryLi = document.createElement('li');
-                primaryLi.value = artist;
+                var primaryLi = document.createElement('li');
+                var a = document.createElement('a');
+                a.href = "#";
+                a.textContent = artist;
+                primaryLi.appendChild(a);
                 primaryLi.style.display = "none";
                 primarySelectionList.appendChild(primaryLi);
             });
