@@ -184,17 +184,20 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 // --- END: Event Listeners for Scroll Controls ---
 
 function processKeyInput() {
-    filter = primarySelectionDropdown.value.toUpperCase();
-    li = primarySelectionDropdown.getElementsByTagName("li");
+    var filter = primarySelectionDropdown.value.toUpperCase();
+    var li = primarySelectionDropdown.getElementsByTagName("li");
+
     for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
+        var a = li[i].getElementsByTagName("a")[0];
+        var txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
         } else {
             li[i].style.display = "none";
         }
     }
+
+    console.log("Key Press Detected!");
 }
 
 // Song Dropdown Change Listener
@@ -376,7 +379,7 @@ function initSongSelection() {
 
             data.forEach((song, index) => {
 
-                console.log("Adding: <" + song + "> to Title Dropdown Box");
+                console.log("Adding: <" + song + "> to Title List");
 
                 const primaryLi = document.createElement('li');
                 primaryLi.value = song;
