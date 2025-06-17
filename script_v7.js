@@ -188,8 +188,9 @@ function processKeyInput() {
     var li = primarySelectionList.getElementsByTagName("li");
 
     for (i = 0; i < li.length; i++) {
-        var a = li[i].getElementsByTagName("a")[0];
-        var txtValue = a.textContent || a.innerText;
+        //var a = li[i].getElementsByTagName("a")[0];
+        //var txtValue = a.textContent || a.innerText;
+        var txtValue = li[i].value.textContent || li[i].value.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
         } else {
