@@ -186,6 +186,8 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 function clearPrimarySelectionList() {
     var li = primarySelectionList.getElementsByTagName("li");
 
+    console.log("Clearing Selection List...");
+
     for (i = 0; i < li.length && i < 10; i++) {
         li[i].style.display = "none";
     }
@@ -206,7 +208,8 @@ function processKeyInput() {
         for (i = 0; i < li.length && i < 10; i++) {
             var a = li[i].getElementsByTagName("a")[0];
             var txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {a
+                console.log("Displaying: ", txtValue);
                 li[i].style.display = "";
             } else {
                 li[i].style.display = "none";
@@ -398,7 +401,7 @@ function initSongSelection() {
 
             data.forEach((song, index) => {
 
-                console.log("Adding: <" + song + "> to Title List");
+                //console.log("Adding: <" + song + "> to Title List");
 
                 var primaryLi = document.createElement('li');
                 var a = document.createElement('a');
@@ -436,7 +439,7 @@ function initArtistSelection() {
 
             data.forEach((artist, index) => {
 
-                console.log("Adding: <" + artist + "> to Title Dropdown Box");
+                //console.log("Adding: <" + artist + "> to Title Dropdown Box");
 
                 var primaryLi = document.createElement('li');
                 var a = document.createElement('a');
