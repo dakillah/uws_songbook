@@ -228,8 +228,10 @@ function handleSongChangeEvent(event) {
     const songTitle = event.target.textContent;
 
     if (event.target.closest('li')) {
+        primarySelectionList.removeEventListener('click', handleSongChangeEvent);
         primarySelectionDropdown.value = songTitle;
         clearPrimarySelectionList();
+        primarySelectionList.addEventListener('click', handleSongChangeEvent);
         console.log("Target Matches!");
     } 
 
@@ -275,8 +277,10 @@ function handleArtistChangeEvent(event) {
     const artist = event.target.textContent;
 
     if (event.target.closest('li')) {
+        primarySelectionList.removeEventListener('click', handleArtistChangeEvent);
         primarySelectionDropdown.value = artist;
         clearPrimarySelectionList();
+        primarySelectionList.addEventListener('click', handleArtistChangeEvent);
         console.log("Target Matches!");
     }
 
