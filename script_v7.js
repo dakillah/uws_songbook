@@ -1,4 +1,6 @@
+const songDropdownGroup = document.getElementById('songDropdownGroup');
 const primarySelectionDropdown = document.getElementById('primarySelectionDropdown');
+const primarySelectionListOverlay = document.getElementById('primarySelectionListOverlay');
 const primarySelectionList = document.getElementById('primarySelectionList');
 const secondarySelectionDropdown = document.getElementById('secondarySelectionDropdown');
 const noSongsMessageP = document.getElementById('noSongsMessage');
