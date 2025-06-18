@@ -212,6 +212,7 @@ function processKeyInput() {
                 console.log("Displaying: ", txtValue);
                 li[i].style.display = "";
             } else {
+                console.log("Hiding: ", txtValue);
                 li[i].style.display = "none";
             }
         }
