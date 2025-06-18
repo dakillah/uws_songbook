@@ -205,12 +205,13 @@ function processKeyInput() {
 
         var li = primarySelectionList.getElementsByTagName("li");
 
-        for (i = 0; i < li.length; i++) {
+        for (i = 0, liCtr; i < li.length && liCtr < 10; i++) {
             var a = li[i].getElementsByTagName("a")[0];
             var txtValue = a.textContent || a.innerText;
             if ((txtValue.toUpperCase().indexOf(filter) > -1)) {
                 console.log("Displaying: ", txtValue);
                 li[i].style.display = "";
+                liCtr++;
             } else {
                 console.log("Hiding: ", txtValue);
                 li[i].style.display = "none";
@@ -228,6 +229,7 @@ function handleSongChangeEvent(event) {
 
     if (event.target.closest('li')) {
         primarySelectionDropdown.value = songTitle;
+        clearPrimarySelectionList();
         console.log("Target Matches!");
     } 
 
@@ -274,6 +276,7 @@ function handleArtistChangeEvent(event) {
 
     if (event.target.closest('li')) {
         primarySelectionDropdown.value = artist;
+        clearPrimarySelectionList();
         console.log("Target Matches!");
     }
 
@@ -361,8 +364,8 @@ function retrieveAndDisplaySong(){
         songTitle = secondarySelectionDropdown.value;
         songArtist = primarySelectionList.value;
     } else {
-        songTitle = primarySelectionDropdown.value;
-        songArtist = secondarySelectionList.value;
+        songTitle = primarySelectionList.value;
+        songArtist = secondarySelectionDropdown.value;
     }
 
     const xhr = new XMLHttpRequest();
