@@ -205,10 +205,10 @@ function processKeyInput() {
 
         var li = primarySelectionList.getElementsByTagName("li");
 
-        for (i = 0; i < li.length && i < 10; i++) {
+        for (i = 0; i < li.lengt; i++) {
             var a = li[i].getElementsByTagName("a")[0];
             var txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {a
+            if ((txtValue.toUpperCase().indexOf(filter) > -1) && i < 10) {
                 console.log("Displaying: ", txtValue);
                 li[i].style.display = "";
             } else {
