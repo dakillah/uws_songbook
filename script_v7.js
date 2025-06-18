@@ -183,17 +183,34 @@ if (scrollSpeedInput && scrollSpeedValueSpan) {
 }
 // --- END: Event Listeners for Scroll Controls ---
 
-function processKeyInput() {
-    var filter = primarySelectionDropdown.value.toUpperCase();
+function clearPrimarySelectionList() {
     var li = primarySelectionList.getElementsByTagName("li");
 
-    for (i = 0; i < li.length; i++) {
-        var a = li[i].getElementsByTagName("a")[0];
-        var txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
+    for (i = 0; i < li.length && i < 10; i++) {
+        li[i].style.display = "none";
+    }
+
+}
+
+function processKeyInput() {
+    var filter = primarySelectionDropdown.value.toUpperCase();
+
+    if(filter.length == 0) {a
+
+        clearPrimarySelectionList();
+
+    } else {
+
+        var li = primarySelectionList.getElementsByTagName("li");
+
+        for (i = 0; i < li.length && i < 10; i++) {
+            var a = li[i].getElementsByTagName("a")[0];
+            var txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
         }
     }
 
@@ -202,7 +219,13 @@ function processKeyInput() {
 
 // Song Dropdown Change Listener
 function handleSongChangeEvent(event) {
-    const songTitle = event.target.value;
+
+    const songTitle = event.target.textContent;
+
+    if (event.target.closest('li')) {
+        primarySelectionDropdown.value = songTitle;
+        console.log("Target Matches!");
+    } 
 
     const xhr = new XMLHttpRequest();
     const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctArtists?title=" + songTitle;
@@ -215,11 +238,6 @@ function handleSongChangeEvent(event) {
             const data = JSON.parse(xhr.responseText);
             console.log(data);
   
-            if (event.target.closest('li')) {
-                primarySelectionDropdown.value = event.target.textContent;
-                console.log("Target Matches!");
-            } 
- 
             data.forEach((artist, index) => {
         
                 console.log("Adding: <" + artist + "> to Artist Dropdown Box");
@@ -247,7 +265,13 @@ function handleSongChangeEvent(event) {
 }
 
 function handleArtistChangeEvent(event) {
-    const artist = event.target.value;
+
+    const artist = event.target.textContent;
+
+    if (event.target.closest('li')) {
+        primarySelectionDropdown.value = artist;
+        console.log("Target Matches!");
+    }
 
     const xhr = new XMLHttpRequest();
     const httpQuery = "https://uws-songbook-svr.onrender.com/listDistinctTitles?artist=" + artist;
@@ -259,11 +283,6 @@ function handleArtistChangeEvent(event) {
         if (xhr.status >= 200 && xhr.status < 300) {
             const data = JSON.parse(xhr.responseText);
             console.log(data);
-
-            if (event.target.closest('li')) {
-                primarySelectionDropdown.value = event.target.textContent;
-                console.log("Target Matches!");
-            }
 
             data.forEach((song, index) => {
 
