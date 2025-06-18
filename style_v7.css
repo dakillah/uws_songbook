@@ -131,6 +131,11 @@ ul#songList a:hover {
     text-align: center;
 }
 
+#primarySeletionOverlay {
+    position: absolute; 
+    bottom: 0; left: 0;
+}
+
 #primarySelectionDropdown {
     padding: 8px 12px;
     border: 1px solid #ccc;
@@ -266,11 +271,16 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.overlay {
+  position: absolute;
+  z-index: 10; /* Higher than other content */
+  /* Other styling for the overlay */
+}
+
 #primarySelectionList {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  position: absolute;
 }
 
 #primarySelectionList li a {
