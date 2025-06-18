@@ -266,6 +266,28 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+#primarySelectionList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+}
+
+#primarySelectionList li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#primarySelectionList li a:hover:not(.header) {
+  background-color: #eee;
+}
+
 /* --- Styles for the song selector group --- */
 .song-selector-group {
     display: flex;       /* Arranges children (label, select) in a row */
