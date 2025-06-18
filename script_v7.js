@@ -188,7 +188,7 @@ function clearPrimarySelectionList() {
 
     console.log("Clearing Selection List...");
 
-    for (i = 0; i < li.length && i < 10; i++) {
+    for (i = 0; i < li.length; i++) {
         li[i].style.display = "none";
     }
 
@@ -366,9 +366,9 @@ function retrieveAndDisplaySong(){
     
     if(selectionSwitch.checked == true){
         songTitle = secondarySelectionDropdown.value;
-        songArtist = primarySelectionList.value;
+        songArtist = primarySelectionDropdown.value;
     } else {
-        songTitle = primarySelectionList.value;
+        songTitle = primarySelectionDropdown.value;
         songArtist = secondarySelectionDropdown.value;
     }
 
