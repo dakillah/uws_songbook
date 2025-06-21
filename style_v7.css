@@ -288,7 +288,6 @@ input:checked + .slider:before {
 #primarySelectionList li a {
   border: 1px solid #ddd;
   margin-top: -1px; /* Prevent double borders */
-  position: absolute;
   background-color: #f6f6f6;
   padding: 12px;
   text-decoration: none;
