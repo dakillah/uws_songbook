@@ -274,16 +274,16 @@ input:checked + .slider:before {
 .overlay {
   position: relative;
   /* Other styling for the overlay */
+  z-index: 999; /* Higher than other content */
 }
 
 #primSelList {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  z-index: 999; /* Higher than other content */
 }
 
-#primarySelectionList li a {
+#primSelList li a {
   border: 1px solid #ddd;
   margin-top: -1px; /* Prevent double borders */
   background-color: #f6f6f6;
@@ -294,7 +294,7 @@ input:checked + .slider:before {
   display: block
 }
 
-#primarySelectionList li a:hover:not(.header) {
+#primSelList li a:hover:not(.header) {
   background-color: #98FB98;
 }
 
