@@ -349,6 +349,11 @@ input:checked + .slider:before {
     margin-bottom: 20px; /* Space below this group */
 }
 
+.song-dropdown-grp2 {
+    display: block;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+}
+
 .jam-button-grp {
     display: flex;       /* Arranges children (label, select) in a row */
     align-items: center; /* Vertically aligns them to the middle */
