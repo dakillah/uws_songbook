@@ -274,7 +274,6 @@ input:checked + .slider:before {
 .overlay {
   position: relative;
   /* Other styling for the overlay */
-  margin-top: 2px; /* Prevent double borders */
 }
 
 #primSelList {
