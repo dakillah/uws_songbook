@@ -274,18 +274,21 @@ input:checked + .slider:before {
 .overlay {
   position: relative;
   /* Other styling for the overlay */
+  margin-top: 31px; /* Prevent double borders */
 }
 
-#primarySelectionList {
+#primSelList {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  position: relative;
   z-index: 999; /* Higher than other content */
 }
 
 #primarySelectionList li a {
   border: 1px solid #ddd;
   margin-top: -1px; /* Prevent double borders */
+  position: absolute;
   background-color: #f6f6f6;
   padding: 12px;
   text-decoration: none;
@@ -295,7 +298,7 @@ input:checked + .slider:before {
 }
 
 #primarySelectionList li a:hover:not(.header) {
-  background-color: #eee;
+  background-color: #98FB98;
 }
 
 /* --- Styles for the song selector group --- */
