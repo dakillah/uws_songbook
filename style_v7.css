@@ -272,7 +272,7 @@ input:checked + .slider:before {
 }
 
 .overlay {
-  position: relative;
+  position: absolute;
   /* Other styling for the overlay */
   z-index: 999; /* Higher than other content */
 }
