@@ -154,49 +154,219 @@ ul#songList a:hover {
     /* font-weight: normal; */ /* If you don't want it bold like other labels */
 }
 
-.scroll-controls {
-    margin-bottom: 15px;
+/* Main container for the row of controls (now only scroll, speed, font size) */
+.controls-display-row {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping if space is tight */
-    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 0;
+    margin-bottom: 10px; /* MODIFIED: Reduced from 15px */
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}   
+    
+/* Adjust .scroll-controls styles */
+.scroll-controls {
+    display: flex; 
+    justify-content: center;
     align-items: center;
+    gap: 10px;
+    margin: 0;
+    flex-wrap: wrap;
+    background-color: #efefef;
+    padding: 6px 12px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+/* Adjust .speed-control-wrapper styles */
+.speed-control-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #efefef;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+/* Adjust .font-size-control-wrapper styles */
+.font-size-control-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #efefef;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+.speed-control-wrapper label,
+.font-size-control-wrapper label {
+    font-weight: normal;
+    margin-bottom: 0;
+    white-space: nowrap;
 }
 
 .scroll-controls button {
-    padding: 8px 12px;
+    padding: 8px 15px;
     border: 1px solid #007bff;
     background-color: #007bff;
     color: white;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.1s;
+    font-size: 0.95em;
 }
 
 .scroll-controls button:hover:not(:disabled) {
     background-color: #0056b3;
+    transform: translateY(-1px);
 }
 
 .scroll-controls button:disabled {
     background-color: #ccc;
     border-color: #ccc;
+    color: #888;
     cursor: not-allowed;
 }
 
-.speed-control-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+#scrollSpeed {
+    width: 120px;
+    height: 6px;
+    cursor: pointer;
+    background: #ddd;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
 }
 
-#scrollSpeed {
-    width: 100px; /* Adjust as needed */
-    cursor: pointer;
+#scrollSpeed::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: grab;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    margin-top: -5px;
+}
+
+#scrollSpeed::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: grab;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
 #scrollSpeedValue {
-    min-width: 15px; /* To prevent layout shift when value changes */
-    text-align: right;
+    min-width: 15px;
+    text-align: center;
     font-weight: bold;
+    color: #007bff;
+}
+
+.font-size-control-wrapper select {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 0.9em;
+    background-color: white;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20512%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M192%20256L64%20128v256l128-128z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    background-size: 0.7em;
+}
+
+/* Basic Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    .folder-selector-group,
+    .song-selector-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .folder-selector-group label,
+    .song-selector-group label {
+        text-align: center;
+    }
+    #songDropdown,
+    input[type="file"] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* #songDetails reverts to column layout on small screens */
+    #songDetails {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    #songDetails h3 {
+        text-align: center;
+        padding-right: 0;
+    }
+
+    /* Chords section and controls section will naturally stack */
+    .chords-section {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .controls-display-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    #songDetails pre {
+        margin-top: 0;
+    }
+
+    .scroll-controls,
+    .speed-control-wrapper,
+    .font-size-control-wrapper {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+
+    #scrollSpeed {
+        width: calc(100% - 100px);
+    }
 }
 
 /* --- Styles for the search selector group --- */
