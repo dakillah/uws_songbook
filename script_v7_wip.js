@@ -202,6 +202,8 @@ function displaySongData(songData) {
         songLyricsPre.textContent = lyricsText;
     }
     songDetailsContainer.style.display = 'block';
+
+    applyFontSize(); // Apply font size after loading new song data
 }
 
 // Attach scroll control event listeners (MODIFIED)
