@@ -251,7 +251,7 @@ function processKeyInput() {
 
         var li = primarySelectionList.getElementsByTagName("li");
 
-        for (i = 0, liCtr = 0; i < li.length && liCtr < 10; i++) {
+        for (i = 0, liCtr = 0; i < li.length && liCtr < 15; i++) {
             var a = li[i].getElementsByTagName("a")[0];
             var txtValue = a.textContent || a.innerText;
             if ((txtValue.toUpperCase().indexOf(filter) > -1)) {
