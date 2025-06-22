@@ -1,0 +1,370 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+}
+
+ul#songList {
+    list-style: none;
+    padding: 0;
+}
+
+ul#songList li {
+    margin-bottom: 10px;
+}
+
+ul#songList a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 8px 12px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    display: inline-block;
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+ul#songList a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Styles for the song viewer part */
+#songDetailsContainer {
+    margin-top: 30px;
+    border-top: 2px solid #eee;
+    padding-top: 20px;
+}
+
+#songDetails h3 {
+    color: #333;
+    margin-top: 0;
+}
+
+#songDetails p {
+    margin-bottom: 10px;
+}
+
+.chords-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chord-image {
+    max-height: 80px;
+    max-width: 100px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.chord-image-missing {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px dashed #cc0000;
+    color: #cc0000;
+    font-size: 0.9em;
+    border-radius: 4px;
+    text-align: center;
+    min-width: 50px;
+}
+
+#songDetails pre { /* This is your existing rule */
+    background-color: #f0f0f0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    white-space: pre-wrap; /* Allows lines to wrap */
+    word-wrap: break-word;
+    /* ADDED/MODIFIED FOR SCROLLING: */
+    max-height: 600px;  /* Or e.g., 20em, 40vh - Adjust to your liking */
+    overflow-y: auto;   /* Allows vertical scrollbar when content overflows */
+}
+
+#songLyrics {
+    font-size: 1.5em; /* Or your preferred size */
+}
+
+#errorMessage {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#noSongsMessage {
+    color: #777;
+    font-style: italic;
+}
+
+#secondarySelectionDropdown {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: white;
+    font-size: 1em;
+    min-width: 250px; /* Adjust as needed */
+    cursor: pointer;
+    text-align: center;
+}
+
+#primarySeletionOverlay {
+    position: absolute; 
+    bottom: 0; left: 0;
+}
+
+#primarySelectionDropdown {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: white;
+    font-size: 1em;
+    min-width: 250px; /* Adjust as needed */
+    cursor: pointer;
+    text-align: center;
+}
+
+/* You can also style the label for the dropdown if you like */
+.song-selector-container label {
+    display: block; /* Make it take its own line if not already */
+    margin-bottom: 5px; /* Space between label and select */
+    /* font-weight: normal; */ /* If you don't want it bold like other labels */
+}
+
+.scroll-controls {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping if space is tight */
+    gap: 10px;
+    align-items: center;
+}
+
+.scroll-controls button {
+    padding: 8px 12px;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.scroll-controls button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.scroll-controls button:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+.speed-control-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#scrollSpeed {
+    width: 100px; /* Adjust as needed */
+    cursor: pointer;
+}
+
+#scrollSpeedValue {
+    min-width: 15px; /* To prevent layout shift when value changes */
+    text-align: right;
+    font-weight: bold;
+}
+
+/* --- Styles for the search selector group --- */
+.search-selector-group {
+    display: flex;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+    gap: 10px;           /* Space between the label and the select dropdown */
+    margin-bottom: 0px; /* Space below this group */
+}
+
+.search-selector-group label{
+    color: lightgray;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 24px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .1s;
+  transition: .1s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .1s;
+  transition: .1s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(21px);
+  -ms-transform: translateX(21px);
+  transform: translateX(21px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.overlay {
+  position: absolute;
+  /* Other styling for the overlay */
+  z-index: 999; /* Higher than other content */
+}
+
+#primarySelectionList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#primarySelectionList li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#primarySelectionList li a:hover:not(.header) {
+  background-color: #98FB98;
+}
+
+/* --- Styles for the song selector group --- */
+.song-selector-group {
+    display: flex;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+    gap: 10px;           /* Space between the label and the select dropdown */
+    margin-bottom: 20px; /* Space below this group */
+}
+
+/* Adjustments for the label and select within this group */
+.song-selector-group label {
+    margin-bottom: 0; /* Remove any bottom margin it might inherit */
+    font-weight: bold; /* Keep it bold like other labels */
+    /* If you had a global 'label { display: block; }', this flex context overrides it for layout */
+}
+
+.song-selector-group select#primarySelectionDropdown {
+    /* The existing #songDropdown styles for padding, border, etc., will still apply.
+       No need to change margin-bottom here if the group has margin-bottom. */
+    /* min-width: 250px; /* This was from your original #songDropdown style, keep if desired */
+}
+
+.song-selector-group select#secondarySelectionDropdown {
+    /* The existing #songDropdown styles for padding, border, etc., will still apply.
+       No need to change margin-bottom here if the group has margin-bottom. */
+    /* min-width: 250px; /* This was from your original #songDropdown style, keep if desired */
+}
+
+.song-selector-group button {
+    padding: 8px 12px;
+    border: 2px solid cornflowerblue;
+    border-radius: 12px;
+    color: black;
+    background-color: white;
+    font-size: 1em;
+    display: inline-block;
+    min-width: 150px; /* Adjust as needed */
+    transition-duration: 0.4s;
+}
+
+.song-selector-group button:hover {
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.song-dropdown-grp {
+    display: flex;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+    gap: 10px;           /* Space between the label and the select dropdown */
+    margin-bottom: 20px; /* Space below this group */
+}
+
+.song-dropdown-grp2 {
+    display: block;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+}
+
+.jam-button-grp {
+    display: flex;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+    gap: 10px;           /* Space between the label and the select dropdown */
+    margin-bottom: 20px; /* Space below this group */
+}
+
+.artist-dropdown-grp {
+    display: flex;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+    gap: 10px;           /* Space between the label and the select dropdown */
+    margin-bottom: 20px; /* Space below this group */
+}
+

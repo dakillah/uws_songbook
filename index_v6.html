@@ -3,40 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ukulele Wednesday SG</title> <!-- Changed title slightly -->
+    <title>Ukulele Wednesday SG</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body onload="initSongSelection()">
+<body>
     <div class="container">
         <h1>Ukulele Wednesday SG</h1>
 
-        <!-- MODIFIED: Replaced <ul> with <select> -->
-        <!-- PREVIOUSLY was: <div class="song-selector-container"> -->
-        <!-- We can rename it or add styles to make it behave like folder-selector-group -->
-        <div class="search-selector-group">
-            <label class="switch">
-                <input id="selectionSwitch" type="checkbox" onclick="toggleSelection()">
-                <span class="slider round"></span>
-           </label>
-           <label id="selectionSwitchLabel" for="switch">Search by Artist instead!</label>
+        <div class="folder-selector-group">
+            <label for="folderInput">Select songs folder:</label>
+            <input type="file" id="folderInput" webkitdirectory directory>
         </div>
-        <div id="songSelect" class="song-selector-group"> <!-- Optional: new class or reuse folder-selector-group if styles are identical -->
-
-            <label for="songDropdown">Title:</label>
+        
+        <div class="song-selector-group">
+            <label for="songDropdown">Choose a song:</label>
             <select id="songDropdown">
                 <option value="">-- Select a Song --</option>
-                <!-- Song options will be populated here by script.js -->
-            </select>
-
-            <label for="artistDropdown">Artist:</label>
-            <select id="artistDropdown">
-                <option value="">-- Select artist --</option>
-                <!-- Song options will be populated here by script.js -->
-            </select>
-
-           <button onclick="retrieveAndDisplaySong()" type="button">Let's Jam!</button>
+                </select>
         </div>
-        <!-- END OF MODIFICATION -->
 
         <p id="noSongsMessage" style="display:none;">No JSON song files found in the selected folder.</p>
 
@@ -44,25 +28,31 @@
             <div id="errorMessage"></div>
             <div id="songDetails">
                 <h3 id="songTitleArtist"></h3> 
-                <p><strong>Chords:</strong></p>
-                <ul id="songChords" class="chords-list"></ul>
-				
-				 <!-- START: Added Scroll Controls -->
-                <div class="scroll-controls">
-                    <button id="startScrollButton">Start Scroll</button>
-                    <button id="stopScrollButton" disabled>Stop Scroll</button>
-                    <button id="resetScrollButton">Reset Scroll</button>
-                   <!-- START: Added Speed Control -->
+                
+                <div class="controls-display-row">
+                    <div class="scroll-controls">
+                        <button id="startScrollButton">Start Scroll</button> 
+                    </div>
+
                     <div class="speed-control-wrapper">
                         <label for="scrollSpeed">Speed:</label>
                         <input type="range" id="scrollSpeed" min="1" max="5" value="1" step="1">
                         <span id="scrollSpeedValue">1</span>
                     </div>
-                    <!-- END: Added Speed Control -->
+
+                    <div class="font-size-control-wrapper">
+                        <label for="fontSizeSelect">Font Size:</label>
+                        <select id="fontSizeSelect">
+                            <option value="small">Small</option>
+							<option value="medium" selected>Medium</option>
+                            <option value="big">Big</option>
+                        </select>
+                    </div>
+
                 </div>
-                <!-- END: Added Scroll Controls -->
-				
-                <p><strong>Lyrics:</strong></p>
+                <div class="chords-section">
+                    <ul id="songChords" class="chords-list"></ul>
+                </div>
                 <pre id="songLyrics"></pre>
             </div>
         </div>

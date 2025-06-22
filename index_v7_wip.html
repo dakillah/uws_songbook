@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ukulele Wednesday SG</title> <!-- Changed title slightly -->
-    <link rel="stylesheet" href="style_v7.css">
+    <link rel="stylesheet" href="style_v7_wip.css">
 </head>
 <body onload="initSongSelection()">
     <div class="container">
@@ -46,30 +46,37 @@
         <div id="songDetailsContainer" style="display:none;">
             <div id="errorMessage"></div>
             <div id="songDetails">
-                <h3 id="songTitleArtist"></h3> 
-                <p><strong>Chords:</strong></p>
-                <ul id="songChords" class="chords-list"></ul>
-				
-                <div class="scroll-controls">
-                    <button id="startScrollButton">Start Scroll</button>
-                    <button id="stopScrollButton" disabled>Stop Scroll</button>
-                    <button id="resetScrollButton">Reset Scroll</button>
-                   <!-- START: Added Speed Control -->
+                <h3 id="songTitleArtist"></h3>
+
+                <div class="controls-display-row">
+                    <div class="scroll-controls">
+                        <button id="startScrollButton">Start Scroll</button>
+                    </div>
+
                     <div class="speed-control-wrapper">
                         <label for="scrollSpeed">Speed:</label>
                         <input type="range" id="scrollSpeed" min="1" max="5" value="1" step="1">
                         <span id="scrollSpeedValue">1</span>
                     </div>
-                    <!-- END: Added Speed Control -->
+
+                    <div class="font-size-control-wrapper">
+                        <label for="fontSizeSelect">Font Size:</label>
+                        <select id="fontSizeSelect">
+                            <option value="small">Small</option>
+                                                        <option value="medium" selected>Medium</option>
+                            <option value="big">Big</option>
+                        </select>
+                    </div>
+
                 </div>
-                <!-- END: Added Scroll Controls -->
-				
-                <p><strong>Lyrics:</strong></p>
+                <div class="chords-section">
+                    <ul id="songChords" class="chords-list"></ul>
+                </div>
                 <pre id="songLyrics"></pre>
             </div>
         </div>
     </div>
 
-    <script src="script_v7.js" defer></script>
+    <script src="script_v7_wip.js" defer></script>
 </body>
 </html>
