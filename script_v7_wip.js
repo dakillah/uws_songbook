@@ -137,12 +137,18 @@ function updateScrollSpeed() {
 
 // Display Song Data
 function displaySongData(songData) {
-    resetLyricsScroll(); // Stop/reset scroll when a new song is displayed
+    // When a new song is loaded, automatically reset scroll position and button state
+    stopLyricsScrollInternal(); // Ensure any ongoing scroll is stopped
+    if (songLyricsPre) {
+        songLyricsPre.scrollTop = 0; // Reset lyrics to the top
+    }
+    toggleScrollButton.textContent = 'Start Scroll'; // Set button to 'Start Scroll'
+
     errorMessageDiv.textContent = '';
     songChordsUl.innerHTML = '';
-    // --- MODIFIED: Combine Title and Artist ---
-    const title = songData.title || "N/A";
-    const artist = songData.artist || "N/A";
+
+    const title = songData.title || "";
+    const artist = songData.artist || "";
 
     if (title === "N/A" && artist === "N/A") {
         songTitleArtistEl.textContent = "Song Details N/A"; // Or just ""
