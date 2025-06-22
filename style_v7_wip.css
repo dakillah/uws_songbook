@@ -80,20 +80,13 @@ ul#songList a:hover {
     margin-bottom: 10px;
 }
 
-.chords-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
 .chord-image {
-    max-height: 80px;
-    max-width: 100px;
+    max-height: 110px;
+    max-width: 110px;
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: #fff;
+    object-fit: contain;
 }
 
 .chord-image-missing {
@@ -105,18 +98,21 @@ ul#songList a:hover {
     border-radius: 4px;
     text-align: center;
     min-width: 50px;
+    box-sizing: border-box;
 }
 
-#songDetails pre { /* This is your existing rule */
+#songDetails pre { /* This styles id="songLyrics" */
     background-color: #f0f0f0;
-    padding: 15px;
+    padding: 5px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    white-space: pre-wrap; /* Allows lines to wrap */
+    white-space: pre-wrap;
     word-wrap: break-word;
-    /* ADDED/MODIFIED FOR SCROLLING: */
-    max-height: 600px;  /* Or e.g., 20em, 40vh - Adjust to your liking */
-    overflow-y: auto;   /* Allows vertical scrollbar when content overflows */
+    max-height: 500px;
+    overflow-y: auto;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 10px;
+    width: 100%;
 }
 
 #songLyrics {
@@ -166,6 +162,21 @@ ul#songList a:hover {
     display: block; /* Make it take its own line if not already */
     margin-bottom: 5px; /* Space between label and select */
     /* font-weight: normal; */ /* If you don't want it bold like other labels */
+}
+
+/* Adjust .chords-list styles: It's now inside .chords-section */
+.chords-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 1.1em;
+    color: #007bff;
+    font-weight: bold;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 }
 
 /* Main container for the row of controls (now only scroll, speed, font size) */
