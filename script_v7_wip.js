@@ -209,26 +209,29 @@ function displaySongData(songData) {
     songDetailsContainer.style.display = 'block';
 }
 
-// --- START: Event Listeners for Scroll Controls ---
-if (startScrollButton && stopScrollButton && resetScrollButton) {
-    startScrollButton.addEventListener('click', startLyricsScroll);
-    stopScrollButton.addEventListener('click', stopLyricsScroll);
-    resetScrollButton.addEventListener('click', resetLyricsScroll);
-} else {
-    console.error("One or more main scroll buttons not found.");
-}
-
-// Event Listener for Speed Control
-if (scrollSpeedInput && scrollSpeedValueSpan) {
-    // Set initial speed display and currentScrollSpeed from default slider value
+// Attach scroll control event listeners (MODIFIED)
+if (toggleScrollButton && scrollSpeedInput && scrollSpeedValueSpan) { // REMOVED: resetScrollButton from check
+    toggleScrollButton.addEventListener('click', toggleScroll); 
+    // REMOVED: resetScrollButton.addEventListener('click', resetLyricsScroll);
+        
+    // Initialize speed display and value
     currentScrollSpeed = parseInt(scrollSpeedInput.value) || 1;
     scrollSpeedValueSpan.textContent = currentScrollSpeed;
-
+    
+    // Listen for input events on the slider to update speed
     scrollSpeedInput.addEventListener('input', updateScrollSpeed);
-    console.log("Scroll speed control listener attached.");
 } else {
-    console.error("Scroll speed input or value span not found.");
+    console.error("One or more essential scroll control elements not found. Check your HTML IDs.");
 }
+    
+// Font Size Event Listener
+if (fontSizeSelect) {
+    applyFontSize();
+    fontSizeSelect.addEventListener('change', applyFontSize);
+} else {
+    console.error("Font size select element (fontSizeSelect) not found. Check your HTML ID.");
+}
+
 // --- END: Event Listeners for Scroll Controls ---
 
 function clearPrimarySelectionList() {
