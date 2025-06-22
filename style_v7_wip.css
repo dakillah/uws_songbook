@@ -50,19 +50,33 @@ ul#songList a:hover {
     color: white;
 }
 
-/* Styles for the song viewer part */
 #songDetailsContainer {
     margin-top: 5px;
-    border-top: 2px solid #eee;
     padding-top: 20px;
-}
-
+}   
+    
+/* NEW: Make #songDetails a flex container for its immediate children */
+#songDetails {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}   
+    
 #songDetails h3 {
     color: #333;
     margin-top: 0;
-}
+    margin-bottom: 0;
+    text-align: left;
+    flex-grow: 1;
+    padding-right: 15px;
+    font-size: 1.8em;
+}   
 
-#songDetails p {
+#songDetails p { 
     margin-bottom: 10px;
 }
 
