@@ -135,17 +135,6 @@ function updateScrollSpeed() {
 
 // --- END: Initialize and Update Speed ---
 
-function resetLyricsScroll() {
-    // console.log("resetLyricsScroll called");
-    stopLyricsScroll();
-    if (songLyricsPre) {
-        songLyricsPre.scrollTop = 0;
-        // console.log("Lyrics scroll reset to 0");
-    } else {
-        // console.error("songLyricsPre element not found in resetLyricsScroll!");
-    }
-}
-
 // Display Song Data
 function displaySongData(songData) {
     resetLyricsScroll(); // Stop/reset scroll when a new song is displayed
