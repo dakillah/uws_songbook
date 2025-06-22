@@ -164,6 +164,21 @@ ul#songList a:hover {
     /* font-weight: normal; */ /* If you don't want it bold like other labels */
 }
 
+/* Adjust .chords-list styles: It's now inside .chords-section */
+.chords-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 1.1em;
+    color: #007bff;
+    font-weight: bold;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
 /* Main container for the row of controls (now only scroll, speed, font size) */
 .controls-display-row {
     display: flex;
