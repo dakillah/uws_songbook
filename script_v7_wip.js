@@ -18,76 +18,122 @@ const songChordsUl = document.getElementById('songChords');
 const songLyricsPre = document.getElementById('songLyrics');
 const errorMessageDiv = document.getElementById('errorMessage');
 
-// Scroll Control Elements
-const startScrollButton = document.getElementById('startScrollButton');
-const stopScrollButton = document.getElementById('stopScrollButton');
-const resetScrollButton = document.getElementById('resetScrollButton');
-// --- START: Speed Control Elements ---
+// Scroll Control Elements (MODIFIED: Removed resetScrollButton)
+const toggleScrollButton = document.getElementById('startScrollButton'); // This button will now toggle start/stop
+// const resetScrollButton = document.getElementById('resetScrollButton'); // REMOVED
 const scrollSpeedInput = document.getElementById('scrollSpeed');
 const scrollSpeedValueSpan = document.getElementById('scrollSpeedValue');
-// --- END: Speed Control Elements ---
 
+// Font Size Control Element
+const fontSizeSelect = document.getElementById('fontSizeSelect');
+
+// Global state variables
 let scrollInterval = null;
 let currentScrollSpeed = 1; // Default, will be updated by input
-const SCROLL_INTERVAL_MS = 300; // Base interval time
+const SCROLL_INTERVAL_MS = 300; // Base interval for scroll updates
+let selectedFiles = [];
 
-// --- START: Initialize and Update Speed ---
+// Define font size mapping
+const FONT_SIZES = {
+    small: '1em',
+    medium: '1.5em',
+    big: '1.9em'
+};
+
+// --- Font Size Control Function ---
+/**
+ * Applies the selected font size to the song lyrics.
+ */
+function applyFontSize() {
+    if (!songLyricsPre || !fontSizeSelect) {
+        console.error("Error: songLyricsPre or fontSizeSelect element not found when applying font size!");
+        return;
+    }
+    const selectedSizeKey = fontSizeSelect.value;
+    songLyricsPre.style.fontSize = FONT_SIZES[selectedSizeKey] || FONT_SIZES.medium;
+}
+
+// --- Scroll Control Functions (ADAPTED for single toggle button) ---
+
+/**
+ * Starts the automatic scrolling of the lyrics (internal logic).
+ * Does NOT handle button state directly, that's for toggleScroll().
+ */
+function startLyricsScrollInternal() {
+    if (!songLyricsPre || scrollInterval) {
+        return; // Don't start if element is missing or already scrolling
+    }
+
+    // If lyrics are not tall enough to scroll, don't start
+    if (songLyricsPre.scrollHeight <= songLyricsPre.clientHeight) {
+        // Since we can't scroll, ensure button state reflects "Start"
+        toggleScrollButton.textContent = 'Start Scroll';
+        // resetScrollButton.disabled = false; // REMOVED
+        return;
+    }
+
+    scrollInterval = setInterval(() => {
+        songLyricsPre.scrollTop += currentScrollSpeed;
+        if (songLyricsPre.scrollTop + songLyricsPre.clientHeight >= songLyricsPre.scrollHeight - 1) {
+            // Reached bottom, stop scrolling and reset button state
+            stopLyricsScrollInternal(); // Stop the interval
+            toggleScrollButton.textContent = 'Start Scroll'; // Update button text
+            // resetScrollButton.disabled = false; // REMOVED
+            // Optional: Reset scroll position to top after reaching end,
+            // or leave it at the end to allow manual scrolling back up.
+            // If you want it to jump to top: songLyricsPre.scrollTop = 0;
+        }
+    }, SCROLL_INTERVAL_MS);
+}
+
+/**
+ * Stops the automatic scrolling of the lyrics (internal logic).
+ * Does NOT handle button state directly, that's for toggleScroll().
+ */
+function stopLyricsScrollInternal() {
+    if (scrollInterval) {
+        clearInterval(scrollInterval);
+        scrollInterval = null;
+    }
+}
+
+/**
+ * Toggles the scroll state (start/stop) and updates the button text accordingly.
+ * This is the function attached to the single "Start Scroll" button.
+ */
+function toggleScroll() {
+    if (scrollInterval) { // If currently scrolling
+        stopLyricsScrollInternal();
+        toggleScrollButton.textContent = 'Start Scroll';
+        // resetScrollButton.disabled = false; // REMOVED
+    } else { // If not scrolling
+        startLyricsScrollInternal(); // Attempt to start scrolling
+        // Only change button text to 'Stop Scroll' if scrolling actually started
+        if (scrollInterval) {
+            toggleScrollButton.textContent = 'Stop Scroll';
+            // resetScrollButton.disabled = true; // REMOVED
+        }
+    }
+}
+
+/**
+ * Updates the scroll speed. If already scrolling, restarts with new speed.
+ */
 function updateScrollSpeed() {
     currentScrollSpeed = parseInt(scrollSpeedInput.value) || 1;
     scrollSpeedValueSpan.textContent = currentScrollSpeed;
 
     // If already scrolling, restart with the new speed
     if (scrollInterval) {
-        stopLyricsScroll(); // Clear existing interval
-        startLyricsScroll(); // Start new one with updated speed
+        stopLyricsScrollInternal(); // Clear existing interval
+        startLyricsScrollInternal(); // Start new one with updated speed
+        // Button state should remain 'Stop Scroll'
+        toggleScrollButton.textContent = 'Stop Scroll';
+        // resetScrollButton.disabled = true; // REMOVED
     }
 }
+
 // --- END: Initialize and Update Speed ---
-
-// Scroll Functions
-function startLyricsScroll() {
-    // console.log("startLyricsScroll called"); // Keep if you need debugging
-    if (!songLyricsPre) {
-        // console.error("songLyricsPre element not found!");
-        return;
-    }
-    if (scrollInterval) {
-        // console.log("Already scrolling, returning.");
-        return;
-    }
-
-    // console.log(`Lyrics scrollHeight: ${songLyricsPre.scrollHeight}, clientHeight: ${songLyricsPre.clientHeight}`);
-    if (songLyricsPre.scrollHeight <= songLyricsPre.clientHeight) {
-        // console.warn("Lyrics not tall enough to scroll or already at bottom.");
-        return;
-    }
-
-    // --- Ensure currentScrollSpeed is up-to-date before starting ---
-    // currentScrollSpeed = parseInt(scrollSpeedInput.value) || 1; // Already handled by updateScrollSpeed or initial value
-
-    scrollInterval = setInterval(() => {
-        songLyricsPre.scrollTop += currentScrollSpeed;
-        if (songLyricsPre.scrollTop + songLyricsPre.clientHeight >= songLyricsPre.scrollHeight -1 ) {
-            // console.log("Scroll reached bottom.");
-            stopLyricsScroll();
-        }
-    }, SCROLL_INTERVAL_MS);
-
-    // console.log("Scroll interval started:", scrollInterval);
-    startScrollButton.disabled = true;
-    stopScrollButton.disabled = false;
-}
-
-function stopLyricsScroll() {
-    // console.log("stopLyricsScroll called");
-    if (scrollInterval) {
-        clearInterval(scrollInterval);
-        // console.log("Scroll interval cleared:", scrollInterval);
-        scrollInterval = null;
-    }
-    startScrollButton.disabled = false;
-    stopScrollButton.disabled = true;
-}
 
 function resetLyricsScroll() {
     // console.log("resetLyricsScroll called");
