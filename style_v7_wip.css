@@ -52,7 +52,7 @@ ul#songList a:hover {
 
 /* Styles for the song viewer part */
 #songDetailsContainer {
-    margin-top: 30px;
+    margin-top: 5px;
     border-top: 2px solid #eee;
     padding-top: 20px;
 }
@@ -473,7 +473,7 @@ input:checked + .slider:before {
     display: flex;       /* Arranges children (label, select) in a row */
     align-items: center; /* Vertically aligns them to the middle */
     gap: 10px;           /* Space between the label and the select dropdown */
-    margin-bottom: 20px; /* Space below this group */
+    margin-bottom: 5px; /* Space below this group */
 }
 
 /* Adjustments for the label and select within this group */
