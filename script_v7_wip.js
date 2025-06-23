@@ -132,7 +132,6 @@ function updateScrollSpeed() {
         // resetScrollButton.disabled = true; // REMOVED
     }
 }
-
 // --- END: Initialize and Update Speed ---
 
 // Display Song Data
@@ -206,30 +205,6 @@ function displaySongData(songData) {
     applyFontSize(); // Apply font size after loading new song data
 }
 
-// Attach scroll control event listeners (MODIFIED)
-if (toggleScrollButton && scrollSpeedInput && scrollSpeedValueSpan) { // REMOVED: resetScrollButton from check
-    toggleScrollButton.addEventListener('click', toggleScroll); 
-    // REMOVED: resetScrollButton.addEventListener('click', resetLyricsScroll);
-        
-    // Initialize speed display and value
-    currentScrollSpeed = parseInt(scrollSpeedInput.value) || 1;
-    scrollSpeedValueSpan.textContent = currentScrollSpeed;
-    
-    // Listen for input events on the slider to update speed
-    scrollSpeedInput.addEventListener('input', updateScrollSpeed);
-} else {
-    console.error("One or more essential scroll control elements not found. Check your HTML IDs.");
-}
-    
-// Font Size Event Listener
-if (fontSizeSelect) {
-    applyFontSize();
-    fontSizeSelect.addEventListener('change', applyFontSize);
-} else {
-    console.error("Font size select element (fontSizeSelect) not found. Check your HTML ID.");
-}
-
-// --- END: Event Listeners for Scroll Controls ---
 
 function clearPrimarySelectionList() {
     var li = primarySelectionList.getElementsByTagName("li");
@@ -387,7 +362,7 @@ function toggleSelection(){
         
         console.log("Toggled!");
         selectionSwitchLabel.style.color = "black";
-        selectionLabel1.textContent = "Artist";
+        selectionLabel1.textContent = "Artist:";
         selectionLabel2.textContent = "Title:";
         secondarySelectionDropdown.appendChild(selectSong);
         primarySelectionList.removeEventListener('click', handleSongChangeEvent);
@@ -519,3 +494,28 @@ function initArtistSelection() {
     xhr.send();
 }
 // --- END: Retrieve Artist List via REST API ---
+
+// Attach scroll control event listeners (MODIFIED)
+if (toggleScrollButton && scrollSpeedInput && scrollSpeedValueSpan) { // REMOVED: resetScrollButton from check
+    toggleScrollButton.addEventListener('click', toggleScroll); 
+    // REMOVED: resetScrollButton.addEventListener('click', resetLyricsScroll);
+        
+    // Initialize speed display and value
+    currentScrollSpeed = parseInt(scrollSpeedInput.value) || 1;
+    scrollSpeedValueSpan.textContent = currentScrollSpeed;
+    
+    // Listen for input events on the slider to update speed
+    scrollSpeedInput.addEventListener('input', updateScrollSpeed);
+} else {
+    console.error("One or more essential scroll control elements not found. Check your HTML IDs.");
+}
+    
+// Font Size Event Listener
+if (fontSizeSelect) {
+    applyFontSize();
+    fontSizeSelect.addEventListener('change', applyFontSize);
+} else {
+    console.error("Font size select element (fontSizeSelect) not found. Check your HTML ID.");
+}
+
+// --- END: Event Listeners for Scroll Controls ---
