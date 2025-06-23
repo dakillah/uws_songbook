@@ -22,7 +22,7 @@
             <div class="song-dropdown-grp" id="songDropdownGroup">
                 <label id="selection-label1" for="songDropdown">Title:</label>
                 <div class="song-dropdown-grp2" id="songDropdownGroup2">
-                    <input type="text" id="primarySelectionDropdown" onkeyup="processKeyInput()" placeholder="Search for names.." title="Type in a name">
+                    <input type="text" id="primarySelectionDropdown" onkeyup="processKeyInput()" placeholder="Type in song title.." title="Type in a name">
                     <div class="overlay" id="primarySelectionListOverlay">
                         <ul class="primSelList" id="primarySelectionList" />
                     </div>
@@ -31,7 +31,7 @@
 
             <div class="artist-dropdown-grp">
                 <label id="selection-label2" for="artistDropdown">Artist:</label>
-                <select id="secondarySelectionDropdown">
+                <select id="secondarySelectionDropdown" class="secondary-select-drp">
                     <option value="">-- Select artist --</option>
                     <!-- Song options will be populated here by script.js -->
                 </select>
