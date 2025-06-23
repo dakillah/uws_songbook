@@ -366,7 +366,7 @@ function toggleSelection(){
         selectionLabel2.textContent = "Title:";
         secondarySelectionDropdown.appendChild(selectSong);
         primarySelectionList.removeEventListener('click', handleSongChangeEvent);
-        primarySelectionList.palceholder = "Type in artist...";
+        primarySelectionList.placeholder = "Type in artist...";
         initArtistSelection();
 
     } else {
@@ -377,7 +377,7 @@ function toggleSelection(){
         selectionLabel2.textContent = "Artist:";
         secondarySelectionDropdown.appendChild(selectArtist);
         primarySelectionList.removeEventListener('click', handleArtistChangeEvent);
-        primarySelectionList.palceholder = "Type in song title...";
+        primarySelectionList.placeholder = "Type in song title...";
         initSongSelection();
     }
 
