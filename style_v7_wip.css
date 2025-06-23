@@ -13,6 +13,7 @@ body {
 
 h1, h2 {
     color: #333;
+    text-align: center;
 }
 
 label {
@@ -529,7 +530,7 @@ input:checked + .slider:before {
     display: flex;       /* Arranges children (label, select) in a row */
     align-items: center; /* Vertically aligns them to the middle */
     gap: 10px;           /* Space between the label and the select dropdown */
-    margin-bottom: 20px; /* Space below this group */
+    margin-bottom: 10px; /* Space below this group */
 }
 
 .song-dropdown-grp2 {
@@ -541,13 +542,13 @@ input:checked + .slider:before {
     display: flex;       /* Arranges children (label, select) in a row */
     align-items: center; /* Vertically aligns them to the middle */
     gap: 10px;           /* Space between the label and the select dropdown */
-    margin-bottom: 20px; /* Space below this group */
+    margin-bottom: 10px; /* Space below this group */
 }
 
 .artist-dropdown-grp {
     display: flex;       /* Arranges children (label, select) in a row */
     align-items: center; /* Vertically aligns them to the middle */
     gap: 10px;           /* Space between the label and the select dropdown */
-    margin-bottom: 20px; /* Space below this group */
+    margin-bottom: 10px; /* Space below this group */
 }
 
