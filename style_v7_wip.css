@@ -164,6 +164,19 @@ ul#songList a:hover {
     /* font-weight: normal; */ /* If you don't want it bold like other labels */
 }
 
+/* New: Wrapper for the chords list, making it a full-width section */
+.chords-section {
+    margin-top: 10px; /* MODIFIED: Reduced from 15px */
+    margin-bottom: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+    width: 100%;
+}      
+
 /* Adjust .chords-list styles: It's now inside .chords-section */
 .chords-list {
     list-style: none;
