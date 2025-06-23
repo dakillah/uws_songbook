@@ -52,7 +52,7 @@ ul#songList a:hover {
 
 #songDetailsContainer {
     margin-top: 5px;
-    padding-top: 20px;
+    padding-top: 5px;
 }   
     
 /* NEW: Make #songDetails a flex container for its immediate children */
