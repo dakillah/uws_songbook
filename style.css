@@ -1,6 +1,6 @@
 body {
     font-family: sans-serif;
-    margin: 20px;
+    margin: 5px;
     background-color: #f9f9f9;
 }
 
@@ -13,6 +13,7 @@ body {
 
 h1, h2 {
     color: #333;
+    text-align: center;
 }
 
 label {
@@ -25,61 +26,43 @@ input[type="file"] {
     margin-bottom: 20px;
 }
 
-ul#songList {
-    list-style: none;
-    padding: 0;
-}
-
-ul#songList li {
-    margin-bottom: 10px;
-}
-
-ul#songList a {
-    text-decoration: none;
-    color: #007bff;
-    padding: 8px 12px;
-    border: 1px solid #007bff;
-    border-radius: 4px;
-    display: inline-block;
-    transition: background-color 0.2s, color 0.2s;
-    cursor: pointer;
-}
-
-ul#songList a:hover {
-    background-color: #007bff;
-    color: white;
-}
-
-/* Styles for the song viewer part */
 #songDetailsContainer {
-    margin-top: 30px;
-    border-top: 2px solid #eee;
-    padding-top: 20px;
-}
-
+    margin-top: 5px;
+    padding-top: 5px;
+}   
+    
+/* NEW: Make #songDetails a flex container for its immediate children */
+#songDetails {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}   
+    
 #songDetails h3 {
     color: #333;
     margin-top: 0;
-}
+    margin-bottom: 0;
+    text-align: left;
+    flex-grow: 1;
+    padding-right: 15px;
+    font-size: 1.8em;
+}   
 
-#songDetails p {
+#songDetails p { 
     margin-bottom: 10px;
 }
 
-.chords-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
 .chord-image {
-    max-height: 80px;
-    max-width: 100px;
+    max-height: 110px;
+    max-width: 110px;
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: #fff;
+    object-fit: contain;
 }
 
 .chord-image-missing {
@@ -91,18 +74,21 @@ ul#songList a:hover {
     border-radius: 4px;
     text-align: center;
     min-width: 50px;
+    box-sizing: border-box;
 }
 
-#songDetails pre { /* This is your existing rule */
+#songDetails pre { /* This styles id="songLyrics" */
     background-color: #f0f0f0;
-    padding: 15px;
+    padding: 5px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    white-space: pre-wrap; /* Allows lines to wrap */
+    white-space: pre-wrap;
     word-wrap: break-word;
-    /* ADDED/MODIFIED FOR SCROLLING: */
-    max-height: 600px;  /* Or e.g., 20em, 40vh - Adjust to your liking */
-    overflow-y: auto;   /* Allows vertical scrollbar when content overflows */
+    max-height: 500px;
+    overflow-y: auto;
+    font-family: 'Courier New', Courier, monospace;
+    margin-top: 10px;
+    width: 100%;
 }
 
 #songLyrics {
@@ -120,24 +106,29 @@ ul#songList a:hover {
     font-style: italic;
 }
 
-#artistDropdown {
+#secondarySelectionDropdown {
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 12px;
     background-color: white;
     font-size: 1em;
-    min-width: 250px; /* Adjust as needed */
+    min-width: 300px; /* Adjust as needed */
     cursor: pointer;
     text-align: center;
 }
 
-#songDropdown {
+#primarySeletionOverlay {
+    position: absolute; 
+    bottom: 0; left: 0;
+}
+
+#primarySelectionDropdown {
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 12px;
     background-color: white;
     font-size: 1em;
-    min-width: 250px; /* Adjust as needed */
+    min-width: 300px; /* Adjust as needed */
     cursor: pointer;
     text-align: center;
 }
@@ -149,49 +140,247 @@ ul#songList a:hover {
     /* font-weight: normal; */ /* If you don't want it bold like other labels */
 }
 
-.scroll-controls {
-    margin-bottom: 15px;
+/* New: Wrapper for the chords list, making it a full-width section */
+.chords-section {
+    margin-top: 10px; /* MODIFIED: Reduced from 15px */
+    margin-bottom: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-sizing: border-box;
+    width: 100%;
+}      
+
+/* Adjust .chords-list styles: It's now inside .chords-section */
+.chords-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-size: 1.1em;
+    color: #007bff;
+    font-weight: bold;
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping if space is tight */
-    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Main container for the row of controls (now only scroll, speed, font size) */
+.controls-display-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 0;
+    margin-bottom: 10px; /* MODIFIED: Reduced from 15px */
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}   
+    
+/* Adjust .scroll-controls styles */
+.scroll-controls {
+    display: flex; 
+    justify-content: center;
     align-items: center;
+    gap: 10px;
+    margin: 0;
+    flex-wrap: wrap;
+    background-color: #efefef;
+    padding: 6px 12px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+/* Adjust .speed-control-wrapper styles */
+.speed-control-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #efefef;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+/* Adjust .font-size-control-wrapper styles */
+.font-size-control-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #efefef;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+}
+
+.speed-control-wrapper label,
+.font-size-control-wrapper label {
+    font-weight: normal;
+    margin-bottom: 0;
+    white-space: nowrap;
 }
 
 .scroll-controls button {
-    padding: 8px 12px;
+    padding: 8px 15px;
     border: 1px solid #007bff;
     background-color: #007bff;
     color: white;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.1s;
+    font-size: 0.95em;
 }
 
 .scroll-controls button:hover:not(:disabled) {
     background-color: #0056b3;
+    transform: translateY(-1px);
 }
 
 .scroll-controls button:disabled {
     background-color: #ccc;
     border-color: #ccc;
+    color: #888;
     cursor: not-allowed;
 }
 
-.speed-control-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+#scrollSpeed {
+    width: 120px;
+    height: 6px;
+    cursor: pointer;
+    background: #ddd;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
 }
 
-#scrollSpeed {
-    width: 100px; /* Adjust as needed */
-    cursor: pointer;
+#scrollSpeed::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: grab;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    margin-top: -5px;
+}
+
+#scrollSpeed::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: grab;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
 #scrollSpeedValue {
-    min-width: 15px; /* To prevent layout shift when value changes */
-    text-align: right;
+    min-width: 15px;
+    text-align: center;
     font-weight: bold;
+    color: #007bff;
+}
+
+.font-size-control-wrapper select {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 0.9em;
+    background-color: white;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20256%20512%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M192%20256L64%20128v256l128-128z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    background-size: 0.7em;
+}
+
+/* Basic Responsive Adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    .folder-selector-group,
+    .song-selector-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .folder-selector-group label,
+    .song-selector-group label {
+        text-align: center;
+    }
+    #songDropdown,
+    input[type="file"] {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* #songDetails reverts to column layout on small screens */
+    #songDetails {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    #songDetails h3 {
+        text-align: center;
+        padding-right: 0;
+    }
+
+    /* Chords section and controls section will naturally stack */
+    .chords-section {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .controls-display-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    #songDetails pre {
+        margin-top: 0;
+    }
+
+    .scroll-controls,
+    .speed-control-wrapper,
+    .font-size-control-wrapper {
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
+    }
+
+    #scrollSpeed {
+        width: calc(100% - 100px);
+    }
 }
 
 /* --- Styles for the search selector group --- */
@@ -266,12 +455,39 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.overlay {
+  position: absolute;
+  /* Other styling for the overlay */
+  z-index: 999; /* Higher than other content */
+}
+
+#primarySelectionList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#primarySelectionList li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#primarySelectionList li a:hover:not(.header) {
+  background-color: #98FB98;
+}
+
 /* --- Styles for the song selector group --- */
 .song-selector-group {
     display: flex;       /* Arranges children (label, select) in a row */
     align-items: center; /* Vertically aligns them to the middle */
     gap: 10px;           /* Space between the label and the select dropdown */
-    margin-bottom: 20px; /* Space below this group */
+    margin-bottom: 5px; /* Space below this group */
 }
 
 /* Adjustments for the label and select within this group */
@@ -281,13 +497,13 @@ input:checked + .slider:before {
     /* If you had a global 'label { display: block; }', this flex context overrides it for layout */
 }
 
-.song-selector-group select#songDropdown {
+.song-selector-group select#primarySelectionDropdown {
     /* The existing #songDropdown styles for padding, border, etc., will still apply.
        No need to change margin-bottom here if the group has margin-bottom. */
     /* min-width: 250px; /* This was from your original #songDropdown style, keep if desired */
 }
 
-.song-selector-group select#artistDropdown {
+.song-selector-group select#secondarySelectionDropdown {
     /* The existing #songDropdown styles for padding, border, etc., will still apply.
        No need to change margin-bottom here if the group has margin-bottom. */
     /* min-width: 250px; /* This was from your original #songDropdown style, keep if desired */
@@ -309,3 +525,30 @@ input:checked + .slider:before {
   background-color: cornflowerblue;
   color: white;
 }
+
+.song-dropdown-grp {
+    display: flex;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+    gap: 10px;           /* Space between the label and the select dropdown */
+    margin-bottom: 10px; /* Space below this group */
+}
+
+.song-dropdown-grp2 {
+    display: block;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+}
+
+.jam-button-grp {
+    display: flex;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+    gap: 10px;           /* Space between the label and the select dropdown */
+    margin-bottom: 10px; /* Space below this group */
+}
+
+.artist-dropdown-grp {
+    display: flex;       /* Arranges children (label, select) in a row */
+    align-items: center; /* Vertically aligns them to the middle */
+    gap: 10px;           /* Space between the label and the select dropdown */
+    margin-bottom: 10px; /* Space below this group */
+}
+
