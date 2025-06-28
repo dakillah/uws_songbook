@@ -37,7 +37,8 @@ let selectedFiles = [];
 const FONT_SIZES = {
     small: '1em',
     medium: '1.5em',
-    big: '1.9em'
+    big: '1.9em',
+    bigbig: '2.4em'
 };
 
 // --- Font Size Control Function ---
