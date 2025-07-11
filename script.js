@@ -25,7 +25,8 @@ const scrollSpeedInput = document.getElementById('scrollSpeed');
 const scrollSpeedValueSpan = document.getElementById('scrollSpeedValue');
 
 // Font Size Control Element
-const fontSizeSelect = document.getElementById('fontSizeSelect');
+const decreaseFontSizeButton = document.getElementById('decreaseFontSize');
+const increaseFontSizeButton = document.getElementById('increaseFontSize');
 
 // Global state variables
 let scrollInterval = null;
@@ -33,25 +34,42 @@ let currentScrollSpeed = 1; // Default, will be updated by input
 const SCROLL_INTERVAL_MS = 300; // Base interval for scroll updates
 let selectedFiles = [];
 
-// Define font size mapping
-const FONT_SIZES = {
-    small: '1em',
-    medium: '1.5em',
-    big: '1.9em',
-    bigbig: '2.4em'
-};
+// Define font size steps
+let currentFontSizeEm = 1.5; // Initial font size for #songLyrics, matches medium
+const FONT_SIZE_STEP = 0.1; // How much to increase/decrease by
+const MIN_FONT_SIZE_EM = 1.0;
+const MAX_FONT_SIZE_EM = 3.0;
 
 // --- Font Size Control Function ---
 /**
  * Applies the selected font size to the song lyrics.
  */
 function applyFontSize() {
-    if (!songLyricsPre || !fontSizeSelect) {
-        console.error("Error: songLyricsPre or fontSizeSelect element not found when applying font size!");
+    if (!songLyricsPre) {
+        console.error("Error: songLyricsPre element not found when applying font size!");
         return;
     }
-    const selectedSizeKey = fontSizeSelect.value;
-    songLyricsPre.style.fontSize = FONT_SIZES[selectedSizeKey] || FONT_SIZES.medium;
+    songLyricsPre.style.fontSize = `${currentFontSizeEm}em`;
+}
+
+/**
+ * Increases the font size and applies it.
+ */
+function increaseFontSize() {
+    if (currentFontSizeEm < MAX_FONT_SIZE_EM) {
+        currentFontSizeEm += FONT_SIZE_STEP;
+        applyFontSize();
+    }
+}
+
+/**
+ * Decreases the font size and applies it.
+ */
+function decreaseFontSize() {
+    if (currentFontSizeEm > MIN_FONT_SIZE_EM) {
+        currentFontSizeEm -= FONT_SIZE_STEP;
+        applyFontSize();
+    }
 }
 
 // --- Scroll Control Functions (ADAPTED for single toggle button) ---
@@ -513,12 +531,13 @@ if (toggleScrollButton && scrollSpeedInput && scrollSpeedValueSpan) { // REMOVED
     console.error("One or more essential scroll control elements not found. Check your HTML IDs.");
 }
     
-// Font Size Event Listener
-if (fontSizeSelect) {
-    applyFontSize();
-    fontSizeSelect.addEventListener('change', applyFontSize);
+// Font Size Event Listener (MODIFIED)
+if (decreaseFontSizeButton && increaseFontSizeButton) {
+    applyFontSize(); // Apply initial font size
+    decreaseFontSizeButton.addEventListener('click', decreaseFontSize);
+    increaseFontSizeButton.addEventListener('click', increaseFontSize);
 } else {
-    console.error("Font size select element (fontSizeSelect) not found. Check your HTML ID.");
+    console.error("Font size control buttons not found. Check your HTML IDs.");
 }
 
 // --- END: Event Listeners for Scroll Controls ---
