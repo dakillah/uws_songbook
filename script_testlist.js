@@ -13,14 +13,10 @@ function initSongList() {
 
             data.forEach((song, index) => {
 
-                //console.log("Adding: <" + song + "> to Title List");
+                console.log("Adding: <" + song.title + " - " + song.artist + ">");
 
                 var primaryLi = document.createElement('li');
-                var a = document.createElement('a');
-                a.href = "#";
-                a.textContent = song.title + " - " + song.artist;
-                primaryLi.appendChild(a);
-                primaryLi.style.display = "none";
+                primaryLi.value = song.title + " - " + song.artist;
                 testSongList.appendChild(primaryLi);
             });
     
