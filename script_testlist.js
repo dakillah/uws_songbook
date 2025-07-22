@@ -16,7 +16,7 @@ function initSongList() {
                 console.log("Adding: <" + song.title + " - " + song.artist + ">");
 
                 var primaryLi = document.createElement('li');
-                primaryLi.value = song.title + " - " + song.artist;
+                primaryLi.textContent = song.title + " - " + song.artist;
                 testSongList.appendChild(primaryLi);
             });
     
