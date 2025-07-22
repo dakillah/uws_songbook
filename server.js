@@ -120,6 +120,98 @@ app.get('/getLyrics', async function (req, res)
     res.json(queryRes);
 })
 
+app.get('/listAllSongsTest', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("test_scores");
+
+    const queryTitle = req.query.title;
+
+    const queryRes = await collection.find().sort({ artist : 1 }).toArray();
+
+    res.json(queryRes);
+})
+
+app.get('/listArtistsTest', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("test_scores");
+
+    const queryRes = await collection.distinct( "artist" );
+
+    res.json(queryRes);
+})
+
+app.get('/listDistinctArtistsTest', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("test_scores");
+
+    const queryTitle = req.query.title;
+
+    const queryRes = await collection.distinct( "artist", { title : queryTitle });
+
+    res.json(queryRes);
+})
+
+app.get('/listTitlesTest', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("test_scores");
+
+    const queryRes = await collection.distinct( "title" );
+
+    res.json(queryRes);
+})
+
+app.get('/listDistinctTitlesTest', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("test_scores");
+
+    const queryArtist = req.query.artist;
+
+    const queryRes = await collection.distinct( "title", { artist : queryArtist });
+
+    res.json(queryRes);
+})
+
+app.get('/getLyricsTest', async function (req, res)
+{
+    const client = new MongoClient(uri);
+    
+    await client.connect();
+    const db = client.db("songlist");
+    const collection = db.collection("test_scores");
+
+    const queryArtist = req.query.artist;
+    const queryTitle = req.query.title;
+
+
+    console.log("getLyrics?artist=" + queryArtist + "&title=" + queryTitle);
+
+    const queryRes = await collection.findOne({ artist : queryArtist, title : queryTitle });
+
+    console.log("queryRes=", queryRes);
+
+    res.json(queryRes);
+})
+
 var server = app.listen(port, function () 
 {
     const client = new MongoClient(uri);
