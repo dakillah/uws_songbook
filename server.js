@@ -38,7 +38,7 @@ app.get('/listAllSongs', async function (req, res)
 
     const queryTitle = req.query.title;
 
-    const queryRes = await collection.find().sort({ artist : 1 }).toArray();
+    const queryRes = await collection.find().sort({ title : 1 }).toArray();
 
     res.json(queryRes);
 })
@@ -130,7 +130,7 @@ app.get('/listAllSongsTest', async function (req, res)
 
     const queryTitle = req.query.title;
 
-    const queryRes = await collection.find().sort({ artist : 1 }).toArray();
+    const queryRes = await collection.find().sort({ title : 1 }).toArray();
 
     res.json(queryRes);
 })
