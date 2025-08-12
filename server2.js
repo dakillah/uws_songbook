@@ -30,6 +30,9 @@ const client = new MongoClient(uri, {
 
 app.get('/listAllSongs', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
@@ -42,6 +45,9 @@ app.get('/listAllSongs', async function (req, res)
 
 app.get('/listArtists', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
@@ -52,6 +58,9 @@ app.get('/listArtists', async function (req, res)
 
 app.get('/listDistinctArtists', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
@@ -64,6 +73,9 @@ app.get('/listDistinctArtists', async function (req, res)
 
 app.get('/listTitles', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
@@ -74,6 +86,9 @@ app.get('/listTitles', async function (req, res)
 
 app.get('/listDistinctTitles', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
@@ -86,6 +101,9 @@ app.get('/listDistinctTitles', async function (req, res)
 
 app.get('/getLyrics', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("scores");
 
@@ -104,6 +122,9 @@ app.get('/getLyrics', async function (req, res)
 
 app.get('/listAllSongsTest', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("test_scores");
 
@@ -116,6 +137,9 @@ app.get('/listAllSongsTest', async function (req, res)
 
 app.get('/listArtistsTest', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("test_scores");
 
@@ -126,6 +150,9 @@ app.get('/listArtistsTest', async function (req, res)
 
 app.get('/listDistinctArtistsTest', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("test_scores");
 
@@ -138,6 +165,9 @@ app.get('/listDistinctArtistsTest', async function (req, res)
 
 app.get('/listTitlesTest', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("test_scores");
 
@@ -148,6 +178,9 @@ app.get('/listTitlesTest', async function (req, res)
 
 app.get('/listDistinctTitlesTest', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("test_scores");
 
@@ -160,6 +193,9 @@ app.get('/listDistinctTitlesTest', async function (req, res)
 
 app.get('/getLyricsTest', async function (req, res)
 {
+    const client = new MongoClient(uri);
+    
+    await client.connect();
     const db = client.db("songlist");
     const collection = db.collection("test_scores");
 
@@ -178,7 +214,7 @@ app.get('/getLyricsTest', async function (req, res)
 
 var server = app.listen(port, function () 
 {
-    await client.connect();
+    const client = new MongoClient(uri);
 
     console.log("Listening...")
 })
