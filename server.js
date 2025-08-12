@@ -178,7 +178,7 @@ app.get('/getLyricsTest', async function (req, res)
 
 var server = app.listen(port, function () 
 {
-    await client.connect();
+    client.connect();
 
     console.log("Listening...")
 })
