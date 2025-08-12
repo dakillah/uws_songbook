@@ -20,6 +20,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://UwsUser:UWSS0ngB00k!@uwssongbookcluster.mlrxi58.mongodb.net/?retryWrites=true&w=majority&appName=uwssongbookcluster";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
+/*
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -27,6 +28,8 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   }
 });
+*/
+const client = new MongoClient(uri);
 
 app.get('/listAllSongs', async function (req, res)
 {
