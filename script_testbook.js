@@ -214,7 +214,8 @@ function displaySongData(songData) {
     let lyricsText = songData.lyrics || "No lyrics provided.";
     if (lyricsText !== "No lyrics provided.") {
         const highlightRegex = /(\[.*?\]|\(.*?\))/g;
-        const formattedLyrics = lyricsText.replace(highlightRegex, '<b>$&</b>');
+        //const formattedLyrics = lyricsText.replace(highlightRegex, '<b>$&</b>');
+        const formattedLyrics = lyricsText.replace(highlightRegex, '<b>$&</b>') + "\n\n\n\n\n\n\n\n";
         songLyricsPre.innerHTML = formattedLyrics;
     } else {
         songLyricsPre.textContent = lyricsText;
