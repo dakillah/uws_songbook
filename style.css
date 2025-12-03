@@ -383,6 +383,20 @@ input[type="file"] {
     }
 }
 
+/* --- NEW FEATURE: Delimiter Highlighting Styles --- */   
+/* Style for text that was inside <> (Red Font) */
+.red-highlight {
+    color: #911111; 
+    font-weight: bold;
+}   
+
+/* Style for text that was inside {} (Blue Font) */
+.blue-highlight {
+    color: blue;
+    font-weight: bold;
+}   
+
+
 /* --- Styles for the search selector group --- */
 .search-selector-group {
     display: flex;       /* Arranges children (label, select) in a row */

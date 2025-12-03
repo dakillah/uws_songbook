@@ -213,10 +213,29 @@ function displaySongData(songData) {
 
     let lyricsText = songData.lyrics || "No lyrics provided.";
     if (lyricsText !== "No lyrics provided.") {
+
+       let highlightedHtml = lyricsText;
+
+        // 1. BLUE FONT
+        const blueHighlightRegex = /\<(.*?)\>/gs;
+        // Reverting to the string replacement which may work now that the order is fixed
+        highlightedHtml = highlightedHtml.replace(blueHighlightRegex, (match, content) => {
+        return `<span class="blue-highlight">${content}</span>`;
+        });
+        
+        // 2. RED FONT: Use function replacement (since it was working)
+        const redHighlightRegex = /\{(.*?)\}/gs;
+        highlightedHtml = highlightedHtml.replace(redHighlightRegex, (match, content) => {
+             return `<span class="red-highlight">${content}</span>`;
+        }); 
+
+        // 3. ORIGINAL BOLDING LOGIC 
         const highlightRegex = /(\[.*?\]|\(.*?\))/g;
-        //const formattedLyrics = lyricsText.replace(highlightRegex, '<b>$&</b>');
-        const formattedLyrics = lyricsText.replace(highlightRegex, '<b>$&</b>') + "\n\n\n\n\n\n\n\n";
-        songLyricsPre.innerHTML = formattedLyrics;
+        highlightedHtml = highlightedHtml.replace(highlightRegex, '<b>$&</b>');
+    
+        // Apply the final HTML
+        songLyricsPre.innerHTML = highlightedHtml;
+
     } else {
         songLyricsPre.textContent = lyricsText;
     }
