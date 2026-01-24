@@ -231,7 +231,7 @@ function displaySongData(songData) {
 
         // 3. ORIGINAL BOLDING LOGIC 
         const highlightRegex = /(\[.*?\]|\(.*?\))/g;
-        highlightedHtml = highlightedHtml.replace(highlightRegex, '<b>$&</b>');
+        highlightedHtml = highlightedHtml.replace(highlightRegex, '<b>$&</b>') + "\n\n\n\n\n\n\n\n";
     
         // Apply the final HTML
         songLyricsPre.innerHTML = highlightedHtml;
