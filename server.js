@@ -5,10 +5,12 @@ const cors = require('cors');
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://uws-songbook.onrender.com');
+    //res.setHeader('Access-Control-Allow-Origin', 'https://uws-songbook.onrender.com');
+    res.header('Access-Control-Allow-Origin', 'https://uws-songbook.onrender.com');
 
     // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    //res.setHeader('Access-Control-Allow-Methods', 'GET');
+    res.header('Access-Control-Allow-Methods', 'GET');
 
     // Pass to next layer of middleware
     next();
